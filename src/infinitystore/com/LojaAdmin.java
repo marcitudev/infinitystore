@@ -4,30 +4,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LojaAdmin {
-	private List<Usuario> usuarios;
-	private List<Produto> produtos;
+	private List<Usuario> usuarios = new ArrayList<Usuario>();
+	private List<Produto> produtos = new ArrayList<Produto>();
 	
 	public String addUsuario(String nome, String sobrenome, String nomeDeUsuario, String senha) {
+		boolean existe = nomeDeUsuarioExiste(nomeDeUsuario);
+		if(existe) {
+			return "Nome de usuário já existe.";
+		} else {
+			Usuario novoUsuario = new Usuario(nome, sobrenome, nomeDeUsuario, senha);
+			usuarios.add(novoUsuario);
+		}
+		return "Usuário " + nomeDeUsuario + " adicionado ao banco de dados.";
+	}
+	
+	public boolean nomeDeUsuarioExiste(String nomeDeUsuario) {
 		for(Usuario usuTeste: usuarios) {
 			if(usuTeste.getNomeDeUsuario().equals(nomeDeUsuario)) {
-				return "Nome de usuário em uso.";
+				return true;
 			}
 		}
-		Usuario novoUsuario = new Usuario(nome, sobrenome, nomeDeUsuario, senha);
-		usuarios.add(novoUsuario);
-		return "Usuário " + novoUsuario.getNomeDeUsuario() + " adicionado ao banco de dados.";
+		return false;
+	}
+	
+	public String EntrarUsuario(String nomeDeUsuario, String senha) {
+		if(nomeDeUsuario.equals("admin") & senha.equals("admin")) {
+			return "admin";
+		} else {
+			for(Usuario usuTeste: usuarios) {
+				if(usuTeste.getNomeDeUsuario().equals(nomeDeUsuario) & usuTeste.getSenha().equals(senha)) {
+					return "usuario";
+				}
+			}
+		}
+		return "nenhum";
+	}
+	
+	public List<Usuario> listarUsuarios(){
+		return this.usuarios;
 	}
 	
 	public Usuario procurarUsuario(String nomeDeUsuario) {
 		for(Usuario usuTeste: usuarios) {
-			if(usuTeste.getNome().equals(nomeDeUsuario)) {
+			if(usuTeste.getNomeDeUsuario().equals(nomeDeUsuario)) {
 				return usuTeste;
 			}
 		}
-		throw new RuntimeException("Usuário não encontrado na base de dados.");
+		throw new RuntimeException("Não existe esse nome de usuário.");
 	}
 	
-	public String removeUsuario(String nomeDeUsuario) {
+	public String removerUsuario(String nomeDeUsuario) {
 		for(Usuario usuTeste: usuarios) {
 			if(usuTeste.getNomeDeUsuario().equals(nomeDeUsuario)) {
 				usuarios.remove(usuTeste);
@@ -56,7 +82,7 @@ public class LojaAdmin {
 			return produtosEncontrados;
 	}
 	
-	public String removeProduto(String nomeProduto) {
+	public String removerProduto(String nomeProduto) {
 		for(Produto proTeste: produtos) {
 			if(proTeste.getNome().equals(nomeProduto)) {
 				produtos.remove(proTeste);

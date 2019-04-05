@@ -1,5 +1,6 @@
 package infinitystore.com;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -7,7 +8,7 @@ public class Usuario {
 	private String sobrenome;
 	private String nomeDeUsuario;
 	private String senha;
-	private List<String> interesses;
+	private List<String> interesses = new ArrayList<String>();
 	
 	public Usuario(String nome, String sobrenome, String nomeDeUsuario, String senha) {
 		this.nome = nome;

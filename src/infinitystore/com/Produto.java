@@ -1,5 +1,6 @@
 package infinitystore.com;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Produto {
@@ -15,6 +16,7 @@ public class Produto {
 		this.marca = marca;
 		this.objeto = objeto;
 		this.categoria = categoria;
+		this.avaliacoes = new ArrayList<Avaliacao>();
 		this.valor = valor;
 	}
 
@@ -56,6 +58,10 @@ public class Produto {
 
 	public void setValor(double valor) {
 		this.valor = valor;
+	}
+	
+	public void addAvaliacao(Avaliacao avaliacao) {
+		avaliacoes.add(avaliacao);
 	}
 
 	public List<Avaliacao> avaliacoes(){
