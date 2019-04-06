@@ -66,14 +66,14 @@ public class LojaAdmin {
 
 	public String addProduto(Produto produto) {
 		produtos.add(produto);
-		return produto.getNome() + " adicionada à loja.";
+		return produto.getNome() + " adicionada à loja";
 	}
 
 	public List<Produto> procurarProduto(String nomeProduto) {
 		List<Produto> produtosEncontrados = new ArrayList<Produto>();
-		ArrayList<String> pesquisaSeparada = quebraNome(nomeProduto);
+		ArrayList<String> pesquisaSeparada = quebraNome(nomeProduto.toLowerCase());
 		for (Produto proTeste: produtos) {
-			ArrayList<String> nomeProdutoSeparado = quebraNome(proTeste.getNome());
+			ArrayList<String> nomeProdutoSeparado = quebraNome(proTeste.getNome().toLowerCase());
 			if(nomeProdutoSeparado.containsAll(pesquisaSeparada)) {
 				produtosEncontrados.add(proTeste);
 			}

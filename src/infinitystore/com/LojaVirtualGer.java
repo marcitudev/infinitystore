@@ -88,10 +88,18 @@ public class LojaVirtualGer {
 						String marca = leitor.nextLine();
 						System.out.println("Categoria: ");
 						String categoria = leitor.nextLine();
-						System.out.println("valor: ");
-						double valor = Double.parseDouble(leitor.nextLine());
-						Produto produto = new Produto(objeto, nomeProduto, marca, categoria, valor);
-						System.out.println(admin.addProduto(produto));
+						boolean entradaValida = false;
+						while(entradaValida == false) {
+							try {
+								System.out.println("valor: ");
+								double valor = Double.parseDouble(leitor.nextLine());
+								Produto produto = new Produto(objeto, nomeProduto, marca, categoria, valor);
+								System.out.println(admin.addProduto(produto) + ", no valor de R$ " + valor + ".");
+								entradaValida = true;
+							} catch(NumberFormatException e) {
+								System.out.println("Valor de ser informado em números, e pontos, caso necessário. Tente novamente, por favor.");
+							}
+						}
 						break;
 					case 6: //Procura produto
 						System.out.println("Nome do produto: ");
