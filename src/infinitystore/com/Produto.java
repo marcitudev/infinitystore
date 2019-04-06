@@ -4,22 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Produto {
+
+	private String objeto;
 	private String nome;
 	private String marca;
-	private String objeto;
 	private String categoria;
 	private List<Avaliacao> avaliacoes;
 	private double valor;
 	
-	public Produto(String nome, String marca, String objeto, String categoria, double valor) {
+	public Produto(String objeto, String nome, String marca, String categoria, double valor) {
+		this.objeto = objeto;
 		this.nome = nome;
 		this.marca = marca;
-		this.objeto = objeto;
 		this.categoria = categoria;
 		this.avaliacoes = new ArrayList<Avaliacao>();
 		this.valor = valor;
 	}
 
+	public String getObjeto() {
+		return objeto;
+	}
+
+	public void setObjeto(String objeto) {
+		this.objeto = objeto;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -34,14 +43,6 @@ public class Produto {
 
 	public void setMarca(String marca) {
 		this.marca = marca;
-	}
-	
-	public String getObjeto() {
-		return objeto;
-	}
-
-	public void setObjeto(String objeto) {
-		this.objeto = objeto;
 	}
 
 	public String getCategoria() {
