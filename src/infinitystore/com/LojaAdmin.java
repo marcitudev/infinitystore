@@ -1,7 +1,6 @@
 package infinitystore.com;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LojaAdmin {
