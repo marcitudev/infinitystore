@@ -6,11 +6,12 @@ import java.util.Scanner;
 public class LojaVirtualGer {
 	public static void main(String[] args) {
 		LojaAdmin admin = new LojaAdmin();
+		admin.recuperaDados();
+		Scanner leitor = new Scanner(System.in);
 		
 		//Login dos usuários ou administradores
 		boolean fechar = false;
 		while(fechar != true) {
-			Scanner leitor = new Scanner(System.in);
 			System.out.print("Nome de usuário: ");
 			String nomeDeUsuario = leitor.nextLine(); //Entrada do nome de usuário
 			System.out.print("Senha: ");
@@ -33,8 +34,8 @@ public class LojaVirtualGer {
 				boolean sair = false;
 				while(sair != true) {
 					int escolha;
-					System.out.println("Gerenciamento: \n1. Adicionar usuário \n2. Listar usuários \n3. Procurar usuário \n4. Remover usuário "
-							+ "\n5. Adicionar produto \n6. Procurar produto");
+					System.out.println("\nModo administrador: \n\n1. Adicionar usuário \n2. Listar usuários \n3. Procurar usuário \n4. Remover usuário "
+							+ "\n5. Adicionar produto \n6. Procurar produto \n7. Remover produto \n8. Sair");
 					try {
 						escolha = Integer.parseInt(leitor.nextLine());
 					} catch(NumberFormatException e){
@@ -43,7 +44,7 @@ public class LojaVirtualGer {
 					}
 					switch(escolha) {
 					case 1: //Adiciona usuário
-						System.out.print("Nome: ");
+						System.out.print("\nNome: ");
 						String nomeUsuario = leitor.nextLine();
 						System.out.print("Sobrenome: ");
 						String sobrenome = leitor.nextLine();
@@ -55,6 +56,7 @@ public class LojaVirtualGer {
 						System.out.println(status);
 						break;
 					case 2: //Lista usuários cadastrados
+						System.out.println("");
 						List<Usuario> listaUsuarios = admin.listarUsuarios();
 						if(listaUsuarios.size() == 0) {
 							System.out.println("Nenhum usuário cadastrado.");
@@ -65,57 +67,94 @@ public class LojaVirtualGer {
 						}
 						break;
 					case 3: //Procura por determinado usuário a partir do username
-						System.out.print("Nome de usuário: ");
+						System.out.print("\nNome de usuário: ");
 						String encontrarUsuario = leitor.nextLine();
 						Usuario usuario = admin.procurarUsuario(encontrarUsuario);
 						if(usuario != null) { //Algum usuário foi encontrado
-							System.out.println(usuario.getNome() + " " + usuario.getSobrenome() + ": " + usuario.getNomeDeUsuario());
+							System.out.println("\n" + usuario.getNome() + " " + usuario.getSobrenome() + ": " + usuario.getNomeDeUsuario());
 						} else { //Nenhum usuário foi encontrado
-							System.out.println("Nenhum " + encontrarUsuario + " encontrado.");
+							System.out.println("\nNenhum " + encontrarUsuario + " encontrado.");
 						}
 						break;
 					case 4: //Remove usuário
-						System.out.println("Nome de usuário: ");
+						System.out.print("\nNome de usuário: ");
 						String nomeUsuarioRemover = leitor.nextLine();
-						System.out.println(admin.removerUsuario(nomeUsuarioRemover));
+						System.out.println("\n" + admin.removerUsuario(nomeUsuarioRemover));
 						break;
 					case 5: //Adiciona produto
-						System.out.println("Tipo de objeto: ");
+						System.out.print("\nTipo de objeto: ");
 						String objeto = leitor.nextLine();
-						System.out.println("Nome do produto: ");
+						System.out.print("Nome do produto: ");
 						String nomeProduto = leitor.nextLine();
-						System.out.println("Marca: ");
+						System.out.print("Marca: ");
 						String marca = leitor.nextLine();
-						System.out.println("Categoria: ");
+						System.out.print("Categoria: ");
 						String categoria = leitor.nextLine();
 						boolean entradaValida = false;
 						while(entradaValida == false) {
 							try {
-								System.out.println("valor: ");
+								System.out.print("valor: ");
 								double valor = Double.parseDouble(leitor.nextLine());
 								Produto produto = new Produto(objeto, nomeProduto, marca, categoria, valor);
-								System.out.println(admin.addProduto(produto) + ", no valor de R$ " + valor + ".");
+								System.out.println("\n" + admin.addProduto(produto) + ", no valor de R$ " + valor + ".");
 								entradaValida = true;
 							} catch(NumberFormatException e) {
-								System.out.println("Valor de ser informado em números, e pontos, caso necessário. Tente novamente, por favor.");
+								System.out.println("\nValor deve ser informado em números, e pontos, caso necessário. Tente novamente, por favor.\n");
 							}
 						}
 						break;
 					case 6: //Procura produto
-						System.out.println("Nome do produto: ");
+						System.out.print("\nNome do produto(s): ");
 						String nomeProdutoProcurado = leitor.nextLine();
 						List<Produto> produtoAchado = admin.procurarProduto(nomeProdutoProcurado);
 						if(produtoAchado.size() == 0) {
-							System.out.println("Nenhum produto encontrado.");
+							System.out.println("\nNenhum produto encontrado.");
 						} else {
 							for(Produto p: produtoAchado) {
-								System.out.println(p.getNome() + "\n" + p.getMarca() + "\nR$ " + p.getValor() + "\n====================");
+								System.out.printf("\n" + p.getNome() + "\n" + p.getMarca() + "\nR$ %.2f %n", p.getValor());
 							}
 						}
 						break;
+					case 7: //Remover produto
+						System.out.print("\nNome do produto(s): ");
+						String nomeProdutoRemover = leitor.nextLine();
+						System.out.println("");
+						List<String> produtosRemover = admin.analiseDeRemocao(nomeProdutoRemover);
+						if(produtosRemover.size() > 0) {
+							for(String nomePro: produtosRemover) {
+								System.out.println(nomePro);
+							}
+							boolean entradaV = false;
+							while(entradaV == false) {
+								try {
+									System.out.print("\nRemova o produto digitando sua referência. Remova: ");
+									int indice = Integer.parseInt(leitor.nextLine());
+									if(indice >= 0 && indice < produtosRemover.size()) {
+										String produtoRemovido = admin.removerProduto(indice);
+										System.out.println(produtoRemovido + " removido com sucesso!");
+										entradaV = true;
+									} else {
+										System.out.println("\nEntrada não válida.");
+									}
+								} catch(NumberFormatException e) {
+									System.out.println("Entrada inválida. Tente novamente.");
+								}
+							}
+						} else {
+							System.out.println("Nenhum produto encontrado.");
+						}
+						break;
+					case 8:
+						sair = true;
+						System.out.println("\nLogout admin.\n");
+						break;
 					}
+					admin.gravaDados();
 				}
+			} else {
+				System.out.println("\nVerifique o nome de usuário e senha e tente novamente.\n");
 			}
 		}
+		leitor.close();
 	}
 }

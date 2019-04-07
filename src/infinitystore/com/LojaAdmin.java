@@ -1,6 +1,8 @@
 package infinitystore.com;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LojaAdmin {
@@ -8,14 +10,17 @@ public class LojaAdmin {
 	private List<Produto> produtos = new ArrayList<Produto>();
 
 	public String addUsuario(String nome, String sobrenome, String nomeDeUsuario, String senha) {
-		boolean existe = nomeDeUsuarioExiste(nomeDeUsuario);
-		if (existe) {
-			return "Nome de usuário já existe.";
-		} else {
-			Usuario novoUsuario = new Usuario(nome, sobrenome, nomeDeUsuario, senha);
-			usuarios.add(novoUsuario);
+		if(nome.length() > 2 && sobrenome.length() > 2 && nomeDeUsuario.length() > 0 && senha.length() >= 6) {
+			boolean existe = nomeDeUsuarioExiste(nomeDeUsuario);
+			if (existe) {
+				return "Nome de usuário já existe.";
+			} else {
+				Usuario novoUsuario = new Usuario(nome, sobrenome, nomeDeUsuario, senha);
+				usuarios.add(novoUsuario);
+			}
+			return "\nUsuário " + nomeDeUsuario + " adicionado ao banco de dados.";
 		}
-		return "Usuário " + nomeDeUsuario + " adicionado ao banco de dados.";
+		return "\nVerifique suas informações e tente novamente.";
 	}
 
 	// Verifica se o nome de usuário já existe para evitar cadastro redundante
@@ -59,7 +64,7 @@ public class LojaAdmin {
 		Usuario usuario = procurarUsuario(nomeDeUsuario);
 		if (usuario != null) {
 			usuarios.remove(usuario);
-			return "Usuário " + nomeDeUsuario + " removido.";
+			return "Usuário " + nomeDeUsuario + " removido com sucesso.";
 		}
 		return "Usuário não existe na base de dados.";
 	}
@@ -89,15 +94,53 @@ public class LojaAdmin {
 		}
 		return nomeSeparado;
 	}
-
-	public String removerProduto(String nomeProduto) {
-		for (Produto proTeste : produtos) {
-			if (proTeste.getNome().equals(nomeProduto)) {
-				produtos.remove(proTeste);
-				return nomeProduto + " removido.";
+	
+	public List<String> analiseDeRemocao(String nomeProduto) { //Listar produto por índice para depois removê-lo
+		List<String> listaProdutos = new ArrayList<String>();
+		List<Produto> produtosListados = procurarProduto(nomeProduto);
+		if(produtosListados.size() > 0) {
+			for (Produto proTeste: produtosListados) {
+				int indice = this.produtos.indexOf(proTeste);
+				listaProdutos.add(indice + ". " + proTeste.getNome() + "\nR$ " + proTeste.getValor() + "\n====================");
 			}
 		}
-		return "Produto não existente.";
+		return listaProdutos;
+	}
+	
+	public String removerProduto(int indice) {
+		String nomeProduto = produtos.get(indice).getNome();
+		produtos.remove(indice);
+		return nomeProduto;
+	}
+	
+	public void gravaDados() {
+		Gravador bancoDados = new Gravador();
+		try {
+			bancoDados.gravaUsuarios(usuarios);
+		} catch (IOException e) {
+			System.out.println("Error 404 Not found");;
+		}
+		
+		try {
+			bancoDados.gravaProdutos(produtos);
+		} catch (IOException e) {
+			System.out.println("Error 404 Not found");;
+		}
+	}
+	
+	public void recuperaDados() {
+		Gravador bancoDados = new Gravador();
+		try {
+			this.usuarios = bancoDados.recuperaUsuarios();
+		} catch (IOException e) {
+			System.out.println("Dados dos usuários carregados... \n");;
+		}
+		
+		try {
+			this.produtos = bancoDados.recuperaProdutos();
+		} catch (IOException e) {
+			System.out.println("Dados dos produtos carregados... \n");;
+		}
 	}
 
 }

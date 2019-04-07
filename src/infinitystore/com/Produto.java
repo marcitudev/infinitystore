@@ -1,9 +1,10 @@
 package infinitystore.com;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Produto {
+public class Produto implements Serializable{
 
 	private String objeto;
 	private String nome;

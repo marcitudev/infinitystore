@@ -1,14 +1,16 @@
 package infinitystore.com;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Serializable{
 	private String nome;
 	private String sobrenome;
 	private String nomeDeUsuario;
 	private String senha;
 	private List<String> interesses = new ArrayList<String>();
+	private List<Produto> favoritos = new ArrayList<Produto>();
 	
 	public Usuario(String nome, String sobrenome, String nomeDeUsuario, String senha) {
 		this.nome = nome;
@@ -34,6 +36,12 @@ public class Usuario {
 	}
 	
 	public void addInteresse(String categoria) {
-		interesses.add(categoria);
+		if(!interesses.contains(categoria)) {
+			interesses.add(categoria);
+		}
+	}
+	
+	public void addFavorito(Produto produto) {
+		favoritos.add(produto);
 	}
 }
