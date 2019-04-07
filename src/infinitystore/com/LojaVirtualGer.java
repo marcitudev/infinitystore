@@ -34,8 +34,9 @@ public class LojaVirtualGer {
 				boolean sair = false;
 				while(sair != true) {
 					int escolha;
-					System.out.println("\nModo administrador: \n\n1. Adicionar usuário \n2. Listar usuários \n3. Procurar usuário \n4. Remover usuário "
-							+ "\n5. Adicionar produto \n6. Procurar produto \n7. Remover produto \n8. Sair");
+					System.out.println("\nModo administrador: \n\nUsuário: (1) Adicionar \n         (2) Listar "
+							+ "\n         (3) Procurar \n         (4) Remover \n\nProduto: "
+							+ "(5) Adicionar \n         (6) Procurar \n         (7) Remover \n\n         (8) Sair");
 					try {
 						escolha = Integer.parseInt(leitor.nextLine());
 					} catch(NumberFormatException e){
@@ -105,8 +106,8 @@ public class LojaVirtualGer {
 						break;
 					case 6: //Procura produto
 						System.out.print("\nNome do produto(s): ");
-						String nomeProdutoProcurado = leitor.nextLine();
-						List<Produto> produtoAchado = admin.procurarProduto(nomeProdutoProcurado);
+						String procurar = leitor.nextLine();
+						List<Produto> produtoAchado = admin.procurarProduto(procurar);
 						if(produtoAchado.size() == 0) {
 							System.out.println("\nNenhum produto encontrado.");
 						} else {
@@ -117,9 +118,9 @@ public class LojaVirtualGer {
 						break;
 					case 7: //Remover produto
 						System.out.print("\nNome do produto(s): ");
-						String nomeProdutoRemover = leitor.nextLine();
+						String procurarRemover = leitor.nextLine();
 						System.out.println("");
-						List<String> produtosRemover = admin.analiseDeRemocao(nomeProdutoRemover);
+						List<String> produtosRemover = admin.analiseDeRemocao(procurarRemover);
 						if(produtosRemover.size() > 0) {
 							for(String nomePro: produtosRemover) {
 								System.out.println(nomePro);

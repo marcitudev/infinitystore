@@ -19,22 +19,40 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 
+	
+	
 	public String getNome() {
 		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getSobrenome() {
 		return sobrenome;
 	}
 
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
 	public String getNomeDeUsuario() {
 		return nomeDeUsuario;
+	}
+
+	public void setNomeDeUsuario(String nomeDeUsuario) {
+		this.nomeDeUsuario = nomeDeUsuario;
 	}
 
 	public String getSenha() {
 		return senha;
 	}
-	
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public void addInteresse(String categoria) {
 		if(!interesses.contains(categoria)) {
 			interesses.add(categoria);
