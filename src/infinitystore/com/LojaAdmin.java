@@ -12,14 +12,14 @@ public class LojaAdmin {
 		if(nome.length() > 2 && sobrenome.length() > 2 && nomeDeUsuario.length() > 0 && senha.length() >= 6) {
 			boolean existe = nomeDeUsuarioExiste(nomeDeUsuario);
 			if (existe) {
-				return "Nome de usuário já existe.";
+				return "Infelizmente já usam este nome de usuário. :'(";
 			} else {
 				Usuario novoUsuario = new Usuario(nome, sobrenome, nomeDeUsuario, senha);
 				usuarios.add(novoUsuario);
 			}
-			return "\nUsuário " + nomeDeUsuario + " adicionado ao banco de dados.";
+			return "\nSeja bem-vindo(a), amigo(a) " + nomeDeUsuario + ", à Infinity Store!";
 		}
-		return "\nVerifique suas informações e tente novamente.";
+		return "\nEita! Talvez você tenha errado alguma informação.";
 	}
 
 	// Verifica se o nome de usuário já existe para evitar cadastro redundante
