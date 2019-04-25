@@ -2,8 +2,6 @@
 package interfaces;
 
 import infinitystore.com.LojaAdmin;
-import interfaces.Interface;
-import javax.swing.JOptionPane;
 
 public class Administrador extends javax.swing.JFrame {
     private LojaAdmin admin = new LojaAdmin();
@@ -16,130 +14,118 @@ public class Administrador extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem11 = new javax.swing.JMenuItem();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         areaDeTrabalho = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
 
         jMenuItem11.setText("jMenuItem11");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Infinity Store (Administrador)");
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jMenu1.setText("Arquivo");
-        jMenu1.setFont(new java.awt.Font("Glober SemiBold Free", 0, 12)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(26, 26, 26));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Remover usuario.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setFocusPainted(false);
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 180, -1, -1));
 
-        jMenuItem9.setText("Carregar dados");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(26, 26, 26));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Procurar usuario.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setFocusPainted(false);
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 115, -1, -1));
+
+        jButton3.setBackground(new java.awt.Color(255, 127, 42));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cadastrar produto.png"))); // NOI18N
+        jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setFocusPainted(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem9);
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 115, -1, -1));
 
-        jMenuItem8.setText("Salvar dados");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setBackground(new java.awt.Color(255, 127, 42));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Remover produto.png"))); // NOI18N
+        jButton4.setBorder(null);
+        jButton4.setBorderPainted(false);
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.setFocusPainted(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem8);
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 180, -1, -1));
 
-        jMenuItem10.setText("Sair");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        jButton5.setBackground(new java.awt.Color(255, 127, 42));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Procurar produto.png"))); // NOI18N
+        jButton5.setBorder(null);
+        jButton5.setBorderPainted(false);
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.setFocusPainted(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem10);
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 245, -1, -1));
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Usuários");
-        jMenu2.setFont(new java.awt.Font("Glober SemiBold Free", 0, 12)); // NOI18N
-
-        jMenuItem1.setText("Cadastrar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setBackground(new java.awt.Color(26, 26, 26));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Sair.png"))); // NOI18N
+        jButton6.setBorder(null);
+        jButton6.setBorderPainted(false);
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton6.setFocusPainted(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 323, -1, -1));
 
-        jMenuItem2.setText("Remover");
-        jMenu2.add(jMenuItem2);
-
-        jMenuItem3.setText("Procurar");
-        jMenu2.add(jMenuItem3);
-
-        jMenuItem4.setText("Listar");
-        jMenu2.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Produtos");
-        jMenu3.setFont(new java.awt.Font("Glober SemiBold Free", 0, 12)); // NOI18N
-
-        jMenuItem5.setText("Cadastrar");
-        jMenu3.add(jMenuItem5);
-
-        jMenuItem7.setText("Remover");
-        jMenu3.add(jMenuItem7);
-
-        jMenuItem6.setText("Procurar");
-        jMenu3.add(jMenuItem6);
-
-        jMenuBar1.add(jMenu3);
-
-        setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(areaDeTrabalho, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(areaDeTrabalho, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/AdminBack.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -17, -1, -1));
+        getContentPane().add(areaDeTrabalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 683, 371));
 
         setSize(new java.awt.Dimension(693, 414));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        admin.recuperaDados();
-        JOptionPane.showMessageDialog(null, "Dados carregados!");
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        admin.gravaDados();
-        JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!");
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
         new Interface().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        CadastrarUsuario cadastrar = new CadastrarUsuario();
-        areaDeTrabalho.add(cadastrar);
-        cadastrar.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new CadastrarProduto().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        new ProcurarProduto().setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        new RemoverProduto().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -151,20 +137,13 @@ public class Administrador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane areaDeTrabalho;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

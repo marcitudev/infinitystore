@@ -50,7 +50,9 @@ public class Interface extends javax.swing.JFrame {
         entrar.setForeground(new java.awt.Color(240, 180, 44));
         entrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Entrar.png"))); // NOI18N
         entrar.setBorder(null);
+        entrar.setBorderPainted(false);
         entrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        entrar.setFocusPainted(false);
         entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 entrarActionPerformed(evt);
@@ -61,7 +63,9 @@ public class Interface extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(26, 26, 26));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cadastrar.png"))); // NOI18N
         jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setFocusPainted(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

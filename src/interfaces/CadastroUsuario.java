@@ -56,12 +56,39 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 283, -1, -1));
+
+        modaAcessorio.setBackground(new java.awt.Color(245, 127, 42));
+        modaAcessorio.setBorder(null);
         getContentPane().add(modaAcessorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 84, -1, -1));
+
+        eletrodomesticos.setBackground(new java.awt.Color(245, 127, 42));
+        eletrodomesticos.setBorder(null);
+        eletrodomesticos.setFocusPainted(false);
         getContentPane().add(eletrodomesticos, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 100, -1, -1));
+
+        informatica.setBackground(new java.awt.Color(245, 127, 42));
+        informatica.setBorder(null);
+        informatica.setFocusPainted(false);
         getContentPane().add(informatica, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 117, -1, -1));
+
+        moveisDecoracao.setBackground(new java.awt.Color(245, 127, 42));
+        moveisDecoracao.setBorder(null);
+        moveisDecoracao.setFocusPainted(false);
         getContentPane().add(moveisDecoracao, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 135, -1, -1));
+
+        industriaComercio.setBackground(new java.awt.Color(245, 127, 42));
+        industriaComercio.setBorder(null);
+        industriaComercio.setFocusPainted(false);
         getContentPane().add(industriaComercio, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 153, -1, -1));
+
+        esporteLazer.setBackground(new java.awt.Color(245, 127, 42));
+        esporteLazer.setBorder(null);
+        esporteLazer.setFocusPainted(false);
         getContentPane().add(esporteLazer, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 187, -1, -1));
+
+        games.setBackground(new java.awt.Color(245, 127, 42));
+        games.setBorder(null);
+        games.setFocusPainted(false);
         getContentPane().add(games, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 170, -1, -1));
 
         nome.setBackground(new java.awt.Color(26, 26, 26));
@@ -94,19 +121,46 @@ public class CadastroUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
+        // TODO add your handling code here:
+        String status = admin.addUsuario(nome.getText(), sobrenome.getText(), nomeDeUsuario.getText(), senha.getText());
+        JOptionPane.showMessageDialog(null, status);
+        if(status.equals("Seja bem-vindo(a), amigo(a) " + nomeDeUsuario.getText() + ", à Infinity Store!")){  
+            admin.gravaDados();
+            this.dispose();
+        }
+    }//GEN-LAST:event_cadastrarActionPerformed
+
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_cancelarActionPerformed
 
-    private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
-        // TODO add your handling code here:
-        String status = admin.addUsuario(nome.getText(), sobrenome.getText(), nomeDeUsuario.getText(), senha.getText());
-        JOptionPane.showMessageDialog(null, status);
-        admin.gravaDados();
-    }//GEN-LAST:event_cadastrarActionPerformed
-
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CadastroUsuario().setVisible(true);

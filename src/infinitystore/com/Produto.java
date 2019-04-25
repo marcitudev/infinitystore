@@ -5,29 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Produto implements Serializable{
-
-	private String objeto;
+    
 	private String nome;
 	private String marca;
-	private String categoria;
-	private List<Avaliacao> avaliacoes;
+        private String descricao;
+        private int quantidade;
+	private List<String> categoria = new ArrayList<String>();
+	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 	private double valor;
 	
-	public Produto(String objeto, String nome, String marca, String categoria, double valor) {
-		this.objeto = objeto;
+	public Produto(String nome, String marca, String descricao, int quantidade, double valor) {
 		this.nome = nome;
 		this.marca = marca;
-		this.categoria = categoria;
-		this.avaliacoes = new ArrayList<Avaliacao>();
+                this.descricao = descricao;
+                this.quantidade = quantidade;
 		this.valor = valor;
-	}
-
-	public String getObjeto() {
-		return objeto;
-	}
-
-	public void setObjeto(String objeto) {
-		this.objeto = objeto;
 	}
 	
 	public String getNome() {
@@ -45,13 +37,29 @@ public class Produto implements Serializable{
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
+        
+        public String getDescricao(){
+            return descricao;
+        }
+        
+        public void setDescricao(String descricao){
+            this.descricao = descricao;
+        }
+        
+        public int getQuantidade(){
+            return this.quantidade;
+        }
+        
+        public void setQuantidade(int quantidade){
+            this.quantidade = quantidade;
+        }
 
-	public String getCategoria() {
+	public List<String> getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void addCategoria(String categoria) {
+		this.categoria.add(categoria);
 	}
 
 	public double getValor() {

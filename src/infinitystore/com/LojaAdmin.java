@@ -17,9 +17,9 @@ public class LojaAdmin {
 				Usuario novoUsuario = new Usuario(nome, sobrenome, nomeDeUsuario, senha);
 				usuarios.add(novoUsuario);
 			}
-			return "\nSeja bem-vindo(a), amigo(a) " + nomeDeUsuario + ", à Infinity Store!";
+			return "Seja bem-vindo(a), amigo(a) " + nomeDeUsuario + ", à Infinity Store!";
 		}
-		return "\nEita! Talvez você tenha errado alguma informação.";
+		return "Eita! Talvez você tenha errado alguma informação.";
 	}
 
 	// Verifica se o nome de usuário já existe para evitar cadastro redundante
@@ -70,11 +70,16 @@ public class LojaAdmin {
 
 	public String addProduto(Produto produto) {
 		produtos.add(produto);
-		return produto.getNome() + " adicionada à loja";
+		return produto.getNome() + " adicionado à loja";
 	}
 
-	public List<Produto> procurarProduto(String nomeProduto) {
+	public List<Produto> procurarProduto(String nomeProduto) {      
 		List<Produto> produtosEncontrados = new ArrayList<Produto>();
+                if(nomeProduto.equals("")){
+                    for (Produto proTeste: produtos) {
+                        produtosEncontrados.add(proTeste);
+                    } 
+                }
 		ArrayList<String> pesquisaSeparada = quebraNome(nomeProduto.toLowerCase());
 		for (Produto proTeste: produtos) {
 			ArrayList<String> nomeProdutoSeparado = quebraNome(proTeste.getNome().toLowerCase());
@@ -82,7 +87,7 @@ public class LojaAdmin {
 				produtosEncontrados.add(proTeste);
 			}
 		}
-		return produtosEncontrados;
+                return produtosEncontrados;
 	}
 
 	public ArrayList<String> quebraNome(String nomeProduto) {
@@ -94,22 +99,20 @@ public class LojaAdmin {
 		return nomeSeparado;
 	}
 	
-	public List<String> analiseDeRemocao(String nomeProduto) { //Listar produto por índice para depois removê-lo
-		List<String> listaProdutos = new ArrayList<String>();
+	public List<Integer> analiseDeRemocao(String nomeProduto) { //Listar produto por índice para depois removê-lo
+		List<Integer> indices = new ArrayList<Integer>();
 		List<Produto> produtosListados = procurarProduto(nomeProduto);
 		if(produtosListados.size() > 0) {
 			for (Produto proTeste: produtosListados) {
 				int indice = this.produtos.indexOf(proTeste);
-				listaProdutos.add(indice + ". " + proTeste.getNome() + "\nR$ " + proTeste.getValor() + "\n====================");
+                                indices.add(indice);
 			}
 		}
-		return listaProdutos;
+		return indices;
 	}
 	
-	public String removerProduto(int indice) {
-		String nomeProduto = produtos.get(indice).getNome();
+	public void removerProduto(int indice) {
 		produtos.remove(indice);
-		return nomeProduto;
 	}
 	
 	public void gravaDados() {
