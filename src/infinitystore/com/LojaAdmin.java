@@ -50,22 +50,36 @@ public class LojaAdmin {
 		return this.usuarios;
 	}
 
-	public Usuario procurarUsuario(String nomeDeUsuario) {
-		for (Usuario usuTeste : usuarios) {
-			if (usuTeste.getNomeDeUsuario().equals(nomeDeUsuario)) {
-				return usuTeste;
+	public List<Usuario> procurarUsuario(String nomeDeUsuario) {
+            List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+            if(nomeDeUsuario.equals("")){
+                for(Usuario u: usuarios){
+                    listaUsuarios.add(u);
+                }
+            } else{
+                for (Usuario usuTeste: usuarios) {
+                    if (usuTeste.getNomeDeUsuario().equals(nomeDeUsuario)) {
+			listaUsuarios.add(usuTeste);
+                    }
+		}
+            } 
+            return listaUsuarios;
+	}
+        
+        public List<Integer> analiseDeRemocaoUser(String nomeDeUsuario) { //Listar produto por índice para depois removê-lo
+		List<Integer> indices = new ArrayList<Integer>();
+		List<Usuario> usuariosAchados = procurarUsuario(nomeDeUsuario);
+		if(usuariosAchados.size() > 0) {
+			for (Usuario uTeste: usuariosAchados) {
+				int indice = this.usuarios.indexOf(uTeste);
+                                indices.add(indice);
 			}
 		}
-		return null;
+		return indices;
 	}
-
-	public String removerUsuario(String nomeDeUsuario) {
-		Usuario usuario = procurarUsuario(nomeDeUsuario);
-		if (usuario != null) {
-			usuarios.remove(usuario);
-			return "Usuário " + nomeDeUsuario + " removido com sucesso.";
-		}
-		return "Usuário não existe na base de dados.";
+        
+	public void removerUsuario(int indice) {
+            usuarios.remove(indice);
 	}
 
 	public String addProduto(Produto produto) {

@@ -6,9 +6,8 @@
 package interfaces;
 
 import infinitystore.com.LojaAdmin;
-import infinitystore.com.Usuario;
-import java.util.ArrayList;
 import java.util.List;
+import infinitystore.com.Usuario;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,13 +15,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author marcio
  */
-public class ProcurarUsuario extends javax.swing.JFrame {
+public class RemoverUsuario extends javax.swing.JFrame {
     private LojaAdmin admin = new LojaAdmin();
-    private List<Usuario> usuarios = new ArrayList<Usuario>();
+    private int[] indices;
+
     /**
-     * Creates new form ProcurarUsuario
+     * Creates new form RemoverUsuario
      */
-    public ProcurarUsuario() {
+    public RemoverUsuario() {
         admin.recuperaDados();
         initComponents();
     }
@@ -36,56 +36,34 @@ public class ProcurarUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
         nomeDeUsuario = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         procurar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(null);
         setResizable(false);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(nomeDeUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 270, -1));
 
-        nomeDeUsuario.setBackground(new java.awt.Color(255, 127, 42));
-        nomeDeUsuario.setFont(new java.awt.Font("Glober SemiBold Free", 0, 13)); // NOI18N
-        nomeDeUsuario.setForeground(new java.awt.Color(254, 254, 254));
-        nomeDeUsuario.setBorder(null);
-        nomeDeUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Remover");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeDeUsuarioActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(nomeDeUsuario);
-        nomeDeUsuario.setBounds(150, 63, 140, 25);
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 90, -1));
 
-        procurar.setBackground(new java.awt.Color(255, 127, 42));
-        procurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos - Botão.png"))); // NOI18N
-        procurar.setBorder(null);
-        procurar.setBorderPainted(false);
-        procurar.setContentAreaFilled(false);
-        procurar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        procurar.setText("Procurar");
         procurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 procurarActionPerformed(evt);
             }
         });
-        getContentPane().add(procurar);
-        procurar.setBounds(110, 59, 40, 29);
+        getContentPane().add(procurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 90, -1));
 
-        tabela.setBorder(null);
         tabela.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,24 +73,26 @@ public class ProcurarUsuario extends javax.swing.JFrame {
                 "Nome", "Sobrenome", "Username", "Senha"
             }
         ));
-        tabela.setGridColor(new java.awt.Color(255, 127, 42));
-        tabela.setRowHeight(25);
         jScrollPane1.setViewportView(tabela);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(96, 141, 479, 124);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Aviso.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(94, 91, 140, 30);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, -26, 710, 410);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 490, 140));
 
         setSize(new java.awt.Dimension(693, 414));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+        
+        if(tabela.getSelectedRow() != -1){
+            admin.removerUsuario(indices[tabela.getSelectedRow()]);
+            modelo.removeRow(tabela.getSelectedRow());
+            admin.gravaDados();
+        } else{
+            JOptionPane.showMessageDialog(null, "Usuário não selecionado!");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procurarActionPerformed
         // TODO add your handling code here:
@@ -124,9 +104,14 @@ public class ProcurarUsuario extends javax.swing.JFrame {
             }
         }
         
+        List<Integer> indicesAchados = admin.analiseDeRemocaoUser(nomeDeUsuario.getText());
+        indices = new int[indicesAchados.size()];
+        for(int k=0; k<indicesAchados.size(); k++){
+            indices[k] = indicesAchados.get(k);
+        }
         List<Usuario> usuarios = admin.procurarUsuario(nomeDeUsuario.getText());
         if(usuarios.size() > 0){
-            for(Usuario u: usuarios){
+            for(infinitystore.com.Usuario u: usuarios){
                 Object[] linha = {u.getNome(), u.getSobrenome(), u.getNomeDeUsuario(), u.getSenha()};
                 modelo.addRow(linha);
             }
@@ -134,27 +119,6 @@ public class ProcurarUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nenhum usuário encontrado");
         }
     }//GEN-LAST:event_procurarActionPerformed
-
-    private void nomeDeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeDeUsuarioActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
-        
-        if(tabela.getRowCount() > 0){   
-            while(tabela.getRowCount() > 0){    
-                modelo.removeRow(0);
-            }
-        }
-        
-        List<Usuario> usuarios = admin.procurarUsuario(nomeDeUsuario.getText());
-        if(usuarios.size() > 0){
-            for(Usuario u: usuarios){
-                Object[] linha = {u.getNome(), u.getSobrenome(), u.getNomeDeUsuario(), u.getSenha()};
-                modelo.addRow(linha);
-            }
-        } else{
-            JOptionPane.showMessageDialog(null, "Nenhum usuário encontrado");
-        }
-    }//GEN-LAST:event_nomeDeUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,28 +137,26 @@ public class ProcurarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProcurarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RemoverUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProcurarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RemoverUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProcurarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RemoverUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProcurarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RemoverUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProcurarUsuario().setVisible(true);
+                new RemoverUsuario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomeDeUsuario;
     private javax.swing.JButton procurar;

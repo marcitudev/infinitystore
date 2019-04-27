@@ -1,5 +1,6 @@
 package infinitystore.com;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +11,17 @@ public class Produto implements Serializable{
 	private String marca;
         private String descricao;
         private int quantidade;
+        private String urlImagem;
 	private List<String> categoria = new ArrayList<String>();
 	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 	private double valor;
 	
-	public Produto(String nome, String marca, String descricao, int quantidade, double valor) {
+	public Produto(String nome, String marca, String descricao, int quantidade, String url, double valor) {
 		this.nome = nome;
 		this.marca = marca;
                 this.descricao = descricao;
                 this.quantidade = quantidade;
+                this.urlImagem = url;
 		this.valor = valor;
 	}
 	
@@ -52,6 +55,10 @@ public class Produto implements Serializable{
         
         public void setQuantidade(int quantidade){
             this.quantidade = quantidade;
+        }
+        
+        public String getImagem(){
+            return this.urlImagem;
         }
 
 	public List<String> getCategoria() {

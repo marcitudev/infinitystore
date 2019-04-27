@@ -92,24 +92,25 @@ public class CadastroUsuario extends javax.swing.JFrame {
         getContentPane().add(games, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 170, -1, -1));
 
         nome.setBackground(new java.awt.Color(26, 26, 26));
-        nome.setFont(new java.awt.Font("Glober SemiBold Free", 0, 12)); // NOI18N
+        nome.setFont(new java.awt.Font("Glober SemiBold Free", 0, 13)); // NOI18N
         nome.setForeground(new java.awt.Color(254, 254, 254));
         nome.setBorder(null);
         getContentPane().add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 90, 180, 20));
 
         sobrenome.setBackground(new java.awt.Color(26, 26, 26));
-        sobrenome.setFont(new java.awt.Font("Glober SemiBold Free", 0, 12)); // NOI18N
+        sobrenome.setFont(new java.awt.Font("Glober SemiBold Free", 0, 13)); // NOI18N
         sobrenome.setForeground(new java.awt.Color(254, 254, 254));
         sobrenome.setBorder(null);
         getContentPane().add(sobrenome, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 140, 180, 20));
 
         nomeDeUsuario.setBackground(new java.awt.Color(26, 26, 26));
-        nomeDeUsuario.setFont(new java.awt.Font("Glober SemiBold Free", 0, 12)); // NOI18N
+        nomeDeUsuario.setFont(new java.awt.Font("Glober SemiBold Free", 0, 13)); // NOI18N
         nomeDeUsuario.setForeground(new java.awt.Color(254, 254, 254));
         nomeDeUsuario.setBorder(null);
         getContentPane().add(nomeDeUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 191, 180, 20));
 
         senha.setBackground(new java.awt.Color(26, 26, 26));
+        senha.setFont(new java.awt.Font("Noto Sans", 0, 13)); // NOI18N
         senha.setForeground(new java.awt.Color(254, 254, 254));
         senha.setBorder(null);
         getContentPane().add(senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 240, 180, 20));

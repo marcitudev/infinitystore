@@ -44,6 +44,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         quantidade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         marca.setText("Marca");
@@ -68,6 +69,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         nome.setText("Nome");
         getContentPane().add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 185, -1));
 
+        descricao.setBackground(new java.awt.Color(26, 26, 26));
         descricao.setColumns(20);
         descricao.setLineWrap(true);
         descricao.setRows(5);
@@ -92,10 +94,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
             int quant = Integer.parseInt(quantidade.getText());
             double valorProduto = Double.parseDouble(valor.getText());
             if(!nomeProduto.equals("") && !marcaProduto.equals("")){   
-                Produto produto = new Produto(nomeProduto, marcaProduto, descricaoProduto, quant, valorProduto);
+                Produto produto = new Produto(nomeProduto, marcaProduto, descricaoProduto, quant, "", valorProduto);
                 String status = admin.addProduto(produto);
                 admin.gravaDados();
-                JOptionPane.showMessageDialog(null, "Produto " + status + " no valor de R$ " + valorProduto + "."); 
+                String mensagem = String.format(" no valor de R$ %.2f", valorProduto);
+                JOptionPane.showMessageDialog(null, "Produto " + status + mensagem + "."); 
             } else{
                 JOptionPane.showMessageDialog(null, "Dados inválidos!");
             }

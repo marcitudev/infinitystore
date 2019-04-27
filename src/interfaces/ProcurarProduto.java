@@ -7,8 +7,11 @@ package interfaces;
 
 import infinitystore.com.LojaAdmin;
 import infinitystore.com.Produto;
+import java.awt.Component;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,23 +42,30 @@ public class ProcurarProduto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        nomeDoProduto.setBackground(new java.awt.Color(255, 127, 42));
+        nomeDoProduto.setFont(new java.awt.Font("Glober SemiBold Free", 0, 13)); // NOI18N
+        nomeDoProduto.setForeground(new java.awt.Color(254, 254, 254));
+        nomeDoProduto.setBorder(null);
         nomeDoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomeDoProdutoActionPerformed(evt);
             }
         });
-        getContentPane().add(nomeDoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 280, -1));
+        getContentPane().add(nomeDoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 66, 140, 25));
 
+        tabela.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Marca", "Descrição", "Quantidade", "Valor"
+                "Nome", "Marca", "Descrição", "Qtd", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -67,16 +77,42 @@ public class ProcurarProduto extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setResizable(false);
+            tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tabela.getColumnModel().getColumn(0).setHeaderValue("Nome");
+            tabela.getColumnModel().getColumn(1).setResizable(false);
+            tabela.getColumnModel().getColumn(1).setHeaderValue("Marca");
+            tabela.getColumnModel().getColumn(2).setResizable(false);
+            tabela.getColumnModel().getColumn(2).setHeaderValue("Descrição");
+            tabela.getColumnModel().getColumn(3).setResizable(false);
+            tabela.getColumnModel().getColumn(3).setPreferredWidth(0);
+            tabela.getColumnModel().getColumn(3).setHeaderValue("Qtd");
+            tabela.getColumnModel().getColumn(4).setResizable(false);
+            tabela.getColumnModel().getColumn(4).setPreferredWidth(30);
+            tabela.getColumnModel().getColumn(4).setHeaderValue("Valor");
+        }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 540, 160));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 540, 160));
 
-        jButton1.setText("Procurar");
+        jButton1.setBackground(new java.awt.Color(255, 127, 42));
+        jButton1.setForeground(new java.awt.Color(26, 26, 26));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos - Botão.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setFocusPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 90, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 68, 40, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -14, -1, -1));
 
         setSize(new java.awt.Dimension(693, 414));
         setLocationRelativeTo(null);
@@ -85,6 +121,7 @@ public class ProcurarProduto extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+        tabela.setDefaultRenderer(Object.class, new CellRenderer());
         
         if(tabela.getRowCount() > 0){   
             while(tabela.getRowCount() > 0){    
@@ -95,7 +132,7 @@ public class ProcurarProduto extends javax.swing.JFrame {
         List<Produto> produtosAchados = admin.procurarProduto(nomeDoProduto.getText());
         if(produtosAchados.size() > 0){
             for(Produto p: produtosAchados){
-                Object[] dados = {p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), p.getValor()};
+                Object[] dados = {p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), String.format("R$ %.2f", p.getValor())};
                 modelo.addRow(dados);
             }
         } else{
@@ -105,6 +142,24 @@ public class ProcurarProduto extends javax.swing.JFrame {
 
     private void nomeDoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeDoProdutoActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+        tabela.setDefaultRenderer(Object.class, new CellRenderer());
+        
+        if(tabela.getRowCount() > 0){   
+            while(tabela.getRowCount() > 0){    
+                modelo.removeRow(0);
+            }
+        }
+        
+        List<Produto> produtosAchados = admin.procurarProduto(nomeDoProduto.getText());
+        if(produtosAchados.size() > 0){
+            for(Produto p: produtosAchados){
+                Object[] dados = {p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), String.format("R$ %.2f", p.getValor())};
+                modelo.addRow(dados);
+            }
+        } else{
+            JOptionPane.showMessageDialog(null, "Produto(s) não encontrado(s)!");
+        }
     }//GEN-LAST:event_nomeDoProdutoActionPerformed
 
     /**
@@ -144,8 +199,19 @@ public class ProcurarProduto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomeDoProduto;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
+}
+
+class CellRenderer extends DefaultTableCellRenderer{
+    public CellRenderer(){
+        super();
+    }
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
+        this.setHorizontalAlignment(CENTER);
+        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+    }
 }

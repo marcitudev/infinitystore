@@ -24,7 +24,7 @@ public class RemoverProduto extends javax.swing.JFrame {
      * Creates new form RemoverProduto
      */
     public RemoverProduto() {
-        admin.recuperaDados();
+        admin.recuperaDados();     
         initComponents();
     }
 
@@ -42,15 +42,34 @@ public class RemoverProduto extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
+        nomeDoProduto.setBackground(new java.awt.Color(255, 127, 42));
+        nomeDoProduto.setFont(new java.awt.Font("Glober SemiBold Free", 0, 13)); // NOI18N
+        nomeDoProduto.setForeground(new java.awt.Color(254, 254, 254));
+        nomeDoProduto.setBorder(null);
+        nomeDoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeDoProdutoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nomeDoProduto);
+        nomeDoProduto.setBounds(150, 66, 140, 25);
+
+        tabela.setBackground(new java.awt.Color(26, 26, 26));
+        tabela.setBorder(null);
+        tabela.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        tabela.setForeground(new java.awt.Color(254, 254, 254));
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Marca", "Descrição", "Quantidade", "Valor"
+                "Nome", "Marca", "Descrição", "Qtd", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -61,50 +80,54 @@ public class RemoverProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabela.setGridColor(new java.awt.Color(26, 26, 26));
+        tabela.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setResizable(false);
+            tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tabela.getColumnModel().getColumn(1).setResizable(false);
+            tabela.getColumnModel().getColumn(2).setResizable(false);
+            tabela.getColumnModel().getColumn(3).setResizable(false);
+            tabela.getColumnModel().getColumn(3).setPreferredWidth(0);
+            tabela.getColumnModel().getColumn(4).setResizable(false);
+            tabela.getColumnModel().getColumn(4).setPreferredWidth(40);
+        }
 
-        jButton1.setText("Procurar");
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(84, 148, 506, 159);
+
+        jButton1.setBackground(new java.awt.Color(255, 127, 42));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos - Botão.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setFocusPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(110, 62, 40, 30);
 
-        jButton2.setText("Remover");
+        jButton2.setBackground(new java.awt.Color(26, 26, 26));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos - Lixeira.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(330, 60, 60, 35);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nomeDoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(93, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeDoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, -28, 710, 420);
 
         setSize(new java.awt.Dimension(693, 414));
         setLocationRelativeTo(null);
@@ -113,6 +136,7 @@ public class RemoverProduto extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+        tabela.setDefaultRenderer(Object.class, new CellRenderer());
         
         if(tabela.getRowCount() > 0){   
             while(tabela.getRowCount() > 0){    
@@ -127,7 +151,7 @@ public class RemoverProduto extends javax.swing.JFrame {
         List<Produto> produtosAchados = admin.procurarProduto(nomeDoProduto.getText());
         if(produtosAchados.size() > 0){
             for(Produto p: produtosAchados){
-                Object[] dados = {p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), p.getValor()};
+                Object[] dados = {p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), String.format("R$ %.2f", p.getValor())};
                 modelo.addRow(dados);
             }
         } else{
@@ -147,6 +171,32 @@ public class RemoverProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Produto não selecionado!");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void nomeDoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeDoProdutoActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+        tabela.setDefaultRenderer(Object.class, new CellRenderer());
+        
+        if(tabela.getRowCount() > 0){   
+            while(tabela.getRowCount() > 0){    
+                modelo.removeRow(0);
+            }
+        }
+        List<Integer> index = admin.analiseDeRemocao(nomeDoProduto.getText());
+        indices = new int[index.size()];
+        for(int k=0; k<index.size(); k++){
+            indices[k] = index.get(k);
+        }
+        List<Produto> produtosAchados = admin.procurarProduto(nomeDoProduto.getText());
+        if(produtosAchados.size() > 0){
+            for(Produto p: produtosAchados){
+                Object[] dados = {p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), String.format("R$ %.2f", p.getValor())};
+                modelo.addRow(dados);
+            }
+        } else{
+            JOptionPane.showMessageDialog(null, "Produto(s) não encontrado(s)!");
+        }
+    }//GEN-LAST:event_nomeDoProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,6 +236,7 @@ public class RemoverProduto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomeDoProduto;
     private javax.swing.JTable tabela;

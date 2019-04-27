@@ -30,10 +30,10 @@ public class Interface extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nomeDeUsuario.setBackground(new java.awt.Color(26, 26, 26));
-        nomeDeUsuario.setFont(new java.awt.Font("Glober SemiBold Free", 1, 12)); // NOI18N
+        nomeDeUsuario.setFont(new java.awt.Font("Glober SemiBold Free", 0, 13)); // NOI18N
         nomeDeUsuario.setForeground(new java.awt.Color(254, 254, 254));
         nomeDeUsuario.setBorder(null);
-        getContentPane().add(nomeDeUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 143, 180, 20));
+        getContentPane().add(nomeDeUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 144, 180, 20));
 
         senha.setBackground(new java.awt.Color(26, 26, 26));
         senha.setForeground(new java.awt.Color(254, 254, 254));
@@ -43,7 +43,7 @@ public class Interface extends javax.swing.JFrame {
                 senhaActionPerformed(evt);
             }
         });
-        getContentPane().add(senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 192, 180, 20));
+        getContentPane().add(senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 193, 180, 20));
 
         entrar.setBackground(new java.awt.Color(26, 26, 26));
         entrar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
