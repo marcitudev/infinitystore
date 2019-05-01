@@ -5,12 +5,15 @@
  */
 package interfaces;
 
+import infinitystore.com.JTableRenderer;
 import infinitystore.com.LojaAdmin;
 import infinitystore.com.Produto;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -69,11 +72,11 @@ public class RemoverProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Marca", "Descrição", "Qtd", "Valor"
+                "Imagem", "Nome", "Marca", "Descrição", "Qtd", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -82,20 +85,22 @@ public class RemoverProduto extends javax.swing.JFrame {
         });
         tabela.setGridColor(new java.awt.Color(26, 26, 26));
         tabela.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tabela.setRowHeight(70);
         jScrollPane1.setViewportView(tabela);
         if (tabela.getColumnModel().getColumnCount() > 0) {
             tabela.getColumnModel().getColumn(0).setResizable(false);
-            tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
             tabela.getColumnModel().getColumn(1).setResizable(false);
+            tabela.getColumnModel().getColumn(1).setPreferredWidth(100);
             tabela.getColumnModel().getColumn(2).setResizable(false);
             tabela.getColumnModel().getColumn(3).setResizable(false);
-            tabela.getColumnModel().getColumn(3).setPreferredWidth(0);
             tabela.getColumnModel().getColumn(4).setResizable(false);
-            tabela.getColumnModel().getColumn(4).setPreferredWidth(40);
+            tabela.getColumnModel().getColumn(4).setPreferredWidth(0);
+            tabela.getColumnModel().getColumn(5).setResizable(false);
+            tabela.getColumnModel().getColumn(5).setPreferredWidth(40);
         }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(84, 148, 506, 159);
+        jScrollPane1.setBounds(80, 150, 520, 190);
 
         jButton1.setBackground(new java.awt.Color(255, 127, 42));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos - Botão.png"))); // NOI18N
@@ -115,8 +120,10 @@ public class RemoverProduto extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(26, 26, 26));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos - Lixeira.png"))); // NOI18N
         jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setFocusPainted(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -143,15 +150,22 @@ public class RemoverProduto extends javax.swing.JFrame {
                 modelo.removeRow(0);
             }
         }
-        List<Integer> index = admin.analiseDeRemocao(nomeDoProduto.getText());
+        List<Integer> index = admin.indiceProduto(nomeDoProduto.getText());
         indices = new int[index.size()];
         for(int k=0; k<index.size(); k++){
             indices[k] = index.get(k);
         }
+        
+        TableColumnModel columnModel = tabela.getColumnModel();
+        JTableRenderer renderer = new JTableRenderer();
+        columnModel.getColumn(0).setCellRenderer(renderer);
+        tabela.setDefaultRenderer(Object.class, new CellRenderer());
+        
         List<Produto> produtosAchados = admin.procurarProduto(nomeDoProduto.getText());
         if(produtosAchados.size() > 0){
             for(Produto p: produtosAchados){
-                Object[] dados = {p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), String.format("R$ %.2f", p.getValor())};
+                ImageIcon imagem = new ImageIcon(p.getImagem());
+                Object[] dados = {imagem, p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), String.format("R$ %.2f", p.getValor())};
                 modelo.addRow(dados);
             }
         } else{
@@ -173,29 +187,7 @@ public class RemoverProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void nomeDoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeDoProdutoActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
-        tabela.setDefaultRenderer(Object.class, new CellRenderer());
-        
-        if(tabela.getRowCount() > 0){   
-            while(tabela.getRowCount() > 0){    
-                modelo.removeRow(0);
-            }
-        }
-        List<Integer> index = admin.analiseDeRemocao(nomeDoProduto.getText());
-        indices = new int[index.size()];
-        for(int k=0; k<index.size(); k++){
-            indices[k] = index.get(k);
-        }
-        List<Produto> produtosAchados = admin.procurarProduto(nomeDoProduto.getText());
-        if(produtosAchados.size() > 0){
-            for(Produto p: produtosAchados){
-                Object[] dados = {p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), String.format("R$ %.2f", p.getValor())};
-                modelo.addRow(dados);
-            }
-        } else{
-            JOptionPane.showMessageDialog(null, "Produto(s) não encontrado(s)!");
-        }
+        jButton1.doClick();
     }//GEN-LAST:event_nomeDoProdutoActionPerformed
 
     /**

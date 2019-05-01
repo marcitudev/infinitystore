@@ -5,12 +5,14 @@
  */
 package interfaces;
 
+import infinitystore.com.JTableRenderer;
 import infinitystore.com.LojaAdmin;
 import infinitystore.com.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -77,6 +79,8 @@ public class ProcurarUsuario extends javax.swing.JFrame {
         procurar.setBorderPainted(false);
         procurar.setContentAreaFilled(false);
         procurar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        procurar.setFocusPainted(false);
+        procurar.setFocusable(false);
         procurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 procurarActionPerformed(evt);
@@ -124,11 +128,17 @@ public class ProcurarUsuario extends javax.swing.JFrame {
             }
         }
         
+        TableColumnModel columnModel = tabela.getColumnModel();
+        JTableRenderer renderer = new JTableRenderer();
+        columnModel.getColumn(0).setCellRenderer(renderer);
+        tabela.setDefaultRenderer(Object.class, new CellRenderer());
+        
         List<Usuario> usuarios = admin.procurarUsuario(nomeDeUsuario.getText());
         if(usuarios.size() > 0){
             for(Usuario u: usuarios){
                 Object[] linha = {u.getNome(), u.getSobrenome(), u.getNomeDeUsuario(), u.getSenha()};
                 modelo.addRow(linha);
+                System.out.println(u.getInteresse());
             }
         } else{
             JOptionPane.showMessageDialog(null, "Nenhum usuário encontrado");
@@ -137,23 +147,7 @@ public class ProcurarUsuario extends javax.swing.JFrame {
 
     private void nomeDeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeDeUsuarioActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
-        
-        if(tabela.getRowCount() > 0){   
-            while(tabela.getRowCount() > 0){    
-                modelo.removeRow(0);
-            }
-        }
-        
-        List<Usuario> usuarios = admin.procurarUsuario(nomeDeUsuario.getText());
-        if(usuarios.size() > 0){
-            for(Usuario u: usuarios){
-                Object[] linha = {u.getNome(), u.getSobrenome(), u.getNomeDeUsuario(), u.getSenha()};
-                modelo.addRow(linha);
-            }
-        } else{
-            JOptionPane.showMessageDialog(null, "Nenhum usuário encontrado");
-        }
+        procurar.doClick();
     }//GEN-LAST:event_nomeDeUsuarioActionPerformed
 
     /**

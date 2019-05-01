@@ -11,6 +11,7 @@ public class Usuario implements Serializable{
 	private String senha;
 	private List<String> interesses = new ArrayList<String>();
 	private List<Produto> favoritos = new ArrayList<Produto>();
+        private List<Produto> carrinho = new ArrayList<Produto>();
 	
 	public Usuario(String nome, String sobrenome, String nomeDeUsuario, String senha) {
 		this.nome = nome;
@@ -18,8 +19,6 @@ public class Usuario implements Serializable{
 		this.nomeDeUsuario = nomeDeUsuario;
 		this.senha = senha;
 	}
-
-	
 	
 	public String getNome() {
 		return nome;
@@ -54,12 +53,34 @@ public class Usuario implements Serializable{
 	}
 
 	public void addInteresse(String categoria) {
-		if(!interesses.contains(categoria)) {
-			interesses.add(categoria);
-		}
+                interesses.add(categoria);
 	}
+        
+        public List<String> getInteresse(){
+            return this.interesses;
+        }
 	
 	public void addFavorito(Produto produto) {
 		favoritos.add(produto);
 	}
+        
+        public List<Produto> getFavoritos(){
+            return this.favoritos;
+        }
+        
+        public void removeFavorito(Produto produto){
+            favoritos.remove(produto);
+        }
+        
+        public void addProduto(Produto produto){
+            carrinho.add(produto);
+        }
+        
+        public List<Produto> getCarrinho(){
+            return this.carrinho;
+        }
+        
+        public void removeProduto(Produto produto){
+            carrinho.remove(produto);
+        }
 }

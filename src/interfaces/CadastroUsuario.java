@@ -2,10 +2,13 @@
 package interfaces;
 
 import infinitystore.com.LojaAdmin;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CadastroUsuario extends javax.swing.JFrame {
     private LojaAdmin admin = new LojaAdmin();
+    private List<String> categorias = new ArrayList<String>();
     
     public CadastroUsuario() {
         admin.recuperaDados();
@@ -124,14 +127,37 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
         // TODO add your handling code here:
-        String status = admin.addUsuario(nome.getText(), sobrenome.getText(), nomeDeUsuario.getText(), senha.getText());
-        JOptionPane.showMessageDialog(null, status);
-        if(status.equals("Seja bem-vindo(a), amigo(a) " + nomeDeUsuario.getText() + ", à Infinity Store!")){  
-            admin.gravaDados();
-            this.dispose();
+        addCategoria();
+        if(categorias.size() > 0){
+            String status = admin.addUsuario(nome.getText(), sobrenome.getText(), nomeDeUsuario.getText(), senha.getText(), this.categorias);
+            JOptionPane.showMessageDialog(null, status);
+            if(status.equals("Seja bem-vindo(a), amigo(a) " + nomeDeUsuario.getText() + ", à Infinity Store!")){  
+                admin.gravaDados();
+                this.dispose();
+            }
+        } else{
+            JOptionPane.showMessageDialog(null, "Por favor, selecione alguma categoria!");
         }
     }//GEN-LAST:event_cadastrarActionPerformed
-
+    
+    private void addCategoria(){
+        if(modaAcessorio.isSelected()){
+            categorias.add("moda e acessorios");
+        }if(eletrodomesticos.isSelected()){
+            categorias.add("eletrodomesticos");
+        }if(informatica.isSelected()){
+            categorias.add("informatica");
+        }if(moveisDecoracao.isSelected()){
+            categorias.add("moveis e decoracao");
+        }if(industriaComercio.isSelected()){
+            categorias.add("industria e comercio");
+        }if(games.isSelected()){
+            categorias.add("games");
+        }if(esporteLazer.isSelected()){
+            categorias.add("esporte e lazer");
+        }
+    }
+    
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();

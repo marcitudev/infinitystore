@@ -109,7 +109,7 @@ public class Teste extends javax.swing.JFrame {
         } catch (IOException ex) {
             System.out.println("Erro na imagem");;
         }
-        Produto novo = new Produto("Camisa", "Adidas", "Description", 11, urlGravada, 12);
+        Produto novo = new Produto("Camisa", "Adidas", "", "Description", 11, urlGravada, 12);
         ImageIcon i = new ImageIcon(novo.getImagem());
         img.setIcon(i);
         admin.addProduto(novo);

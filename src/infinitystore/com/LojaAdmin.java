@@ -8,13 +8,16 @@ public class LojaAdmin {
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	private List<Produto> produtos = new ArrayList<Produto>();
 
-	public String addUsuario(String nome, String sobrenome, String nomeDeUsuario, String senha) {
+	public String addUsuario(String nome, String sobrenome, String nomeDeUsuario, String senha, List<String> categorias) {
 		if(nome.length() > 2 && sobrenome.length() > 2 && nomeDeUsuario.length() > 0 && senha.length() >= 6) {
 			boolean existe = nomeDeUsuarioExiste(nomeDeUsuario);
 			if (existe) {
 				return "Infelizmente já usam este nome de usuário. :'(";
 			} else {
 				Usuario novoUsuario = new Usuario(nome, sobrenome, nomeDeUsuario, senha);
+                                for(String cat: categorias){
+                                    novoUsuario.addInteresse(cat);
+                                }
 				usuarios.add(novoUsuario);
 			}
 			return "Seja bem-vindo(a), amigo(a) " + nomeDeUsuario + ", à Infinity Store!";
@@ -66,7 +69,7 @@ public class LojaAdmin {
             return listaUsuarios;
 	}
         
-        public List<Integer> analiseDeRemocaoUser(String nomeDeUsuario) { //Listar produto por índice para depois removê-lo
+        public List<Integer> indiceUsuario(String nomeDeUsuario) { //Listar produto por índice para depois removê-lo
 		List<Integer> indices = new ArrayList<Integer>();
 		List<Usuario> usuariosAchados = procurarUsuario(nomeDeUsuario);
 		if(usuariosAchados.size() > 0) {
@@ -103,6 +106,17 @@ public class LojaAdmin {
 		}
                 return produtosEncontrados;
 	}
+        
+        public List<Produto> procurarProdutoCategoria(String categoria){
+            List<Produto> produtosAchados = new ArrayList<Produto>();
+            for(Produto p: this.produtos){
+                if(p.getCategoria().equals(categoria)){
+                }else {
+                    produtosAchados.add(p);
+                }
+            }
+            return produtosAchados;
+        }
 
 	public ArrayList<String> quebraNome(String nomeProduto) {
 		ArrayList<String> nomeSeparado = new ArrayList<String>();
@@ -113,7 +127,7 @@ public class LojaAdmin {
 		return nomeSeparado;
 	}
 	
-	public List<Integer> analiseDeRemocao(String nomeProduto) { //Listar produto por índice para depois removê-lo
+	public List<Integer> indiceProduto(String nomeProduto) { //Listar produto por índice para depois removê-lo
 		List<Integer> indices = new ArrayList<Integer>();
 		List<Produto> produtosListados = procurarProduto(nomeProduto);
 		if(produtosListados.size() > 0) {
@@ -135,8 +149,7 @@ public class LojaAdmin {
 			bancoDados.gravaUsuarios(usuarios);
 		} catch (IOException e) {
 			System.out.println("Error 404 Not found");;
-		}
-		
+                }
 		try {
 			bancoDados.gravaProdutos(produtos);
 		} catch (IOException e) {

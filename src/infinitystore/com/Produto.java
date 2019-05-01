@@ -9,16 +9,16 @@ public class Produto implements Serializable{
     
 	private String nome;
 	private String marca;
+	private String categoria;
         private String descricao;
         private int quantidade;
         private String urlImagem;
-	private List<String> categoria = new ArrayList<String>();
-	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 	private double valor;
 	
-	public Produto(String nome, String marca, String descricao, int quantidade, String url, double valor) {
+	public Produto(String nome, String marca, String categoria, String descricao, int quantidade, String url, double valor) {
 		this.nome = nome;
 		this.marca = marca;
+                this.categoria = categoria;
                 this.descricao = descricao;
                 this.quantidade = quantidade;
                 this.urlImagem = url;
@@ -58,15 +58,15 @@ public class Produto implements Serializable{
         }
         
         public String getImagem(){
-            return this.urlImagem;
+                return this.urlImagem;
         }
 
-	public List<String> getCategoria() {
-		return categoria;
+	public String getCategoria() {
+		return this.categoria;
 	}
 
 	public void addCategoria(String categoria) {
-		this.categoria.add(categoria);
+                this.categoria = categoria;
 	}
 
 	public double getValor() {
@@ -75,14 +75,6 @@ public class Produto implements Serializable{
 
 	public void setValor(double valor) {
 		this.valor = valor;
-	}
-	
-	public void addAvaliacao(Avaliacao avaliacao) {
-		avaliacoes.add(avaliacao);
-	}
-
-	public List<Avaliacao> avaliacoes(){
-		return avaliacoes;
 	}
 
 }

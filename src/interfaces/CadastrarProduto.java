@@ -7,7 +7,12 @@ package interfaces;
 
 import infinitystore.com.LojaAdmin;
 import infinitystore.com.Produto;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -35,6 +40,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         marca = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         valor = new javax.swing.JTextField();
@@ -42,8 +48,18 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         descricao = new javax.swing.JTextArea();
         quantidade = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        diretorio = new javax.swing.JTextField();
+        modaAcessorio = new javax.swing.JRadioButton();
+        eletrodomesticos = new javax.swing.JRadioButton();
+        informatica = new javax.swing.JRadioButton();
+        moveisDecoracao = new javax.swing.JRadioButton();
+        industriaComercio = new javax.swing.JRadioButton();
+        esporteLazer = new javax.swing.JRadioButton();
+        games = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(683, 291));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -64,12 +80,12 @@ public class CadastrarProduto extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, -1, -1));
 
         valor.setText("Valor");
-        getContentPane().add(valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 80, -1));
+        getContentPane().add(valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 80, -1));
 
         nome.setText("Nome");
         getContentPane().add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 185, -1));
 
-        descricao.setBackground(new java.awt.Color(26, 26, 26));
+        descricao.setBackground(new java.awt.Color(255, 255, 255));
         descricao.setColumns(20);
         descricao.setLineWrap(true);
         descricao.setRows(5);
@@ -81,7 +97,57 @@ public class CadastrarProduto extends javax.swing.JFrame {
         quantidade.setText("Quantidade");
         getContentPane().add(quantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 100, -1));
 
-        setSize(new java.awt.Dimension(564, 356));
+        jButton1.setText("Arquivo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 80, -1));
+
+        diretorio.setEditable(false);
+        getContentPane().add(diretorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 170, -1));
+
+        modaAcessorio.setBackground(new java.awt.Color(245, 127, 42));
+        modaAcessorio.setBorder(null);
+        modaAcessorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modaAcessorioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(modaAcessorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 84, -1, -1));
+
+        eletrodomesticos.setBackground(new java.awt.Color(245, 127, 42));
+        eletrodomesticos.setBorder(null);
+        eletrodomesticos.setFocusPainted(false);
+        getContentPane().add(eletrodomesticos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, -1, -1));
+
+        informatica.setBackground(new java.awt.Color(245, 127, 42));
+        informatica.setBorder(null);
+        informatica.setFocusPainted(false);
+        getContentPane().add(informatica, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 117, -1, -1));
+
+        moveisDecoracao.setBackground(new java.awt.Color(245, 127, 42));
+        moveisDecoracao.setBorder(null);
+        moveisDecoracao.setFocusPainted(false);
+        getContentPane().add(moveisDecoracao, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 135, -1, -1));
+
+        industriaComercio.setBackground(new java.awt.Color(245, 127, 42));
+        industriaComercio.setBorder(null);
+        industriaComercio.setFocusPainted(false);
+        getContentPane().add(industriaComercio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 153, -1, -1));
+
+        esporteLazer.setBackground(new java.awt.Color(245, 127, 42));
+        esporteLazer.setBorder(null);
+        esporteLazer.setFocusPainted(false);
+        getContentPane().add(esporteLazer, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 187, -1, -1));
+
+        games.setBackground(new java.awt.Color(245, 127, 42));
+        games.setBorder(null);
+        games.setFocusPainted(false);
+        getContentPane().add(games, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, -1));
+
+        setSize(new java.awt.Dimension(694, 414));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -90,11 +156,22 @@ public class CadastrarProduto extends javax.swing.JFrame {
         String nomeProduto = nome.getText();
         String marcaProduto = marca.getText();
         String descricaoProduto = descricao.getText();
+        
+        String url = diretorio.getText();
+        BufferedImage imagem = null;
+        String urlGravada = "/home/marcio/Documents/Projetos Java/LojaVirtual/src/imagensProdutos/"+nomeProduto+".png";
+        try {
+            imagem = ImageIO.read(new File(url));
+            ImageIO.write(imagem, "jpg", new File(urlGravada));
+        } catch (IOException ex) {
+            System.out.println("Erro na imagem");;
+        }
+        
         try{
             int quant = Integer.parseInt(quantidade.getText());
             double valorProduto = Double.parseDouble(valor.getText());
-            if(!nomeProduto.equals("") && !marcaProduto.equals("")){   
-                Produto produto = new Produto(nomeProduto, marcaProduto, descricaoProduto, quant, "", valorProduto);
+            if(!nomeProduto.equals("") && !marcaProduto.equals("") && !url.equals("")){   
+                Produto produto = new Produto(nomeProduto, marcaProduto,"", descricaoProduto, quant, urlGravada, valorProduto);
                 String status = admin.addProduto(produto);
                 admin.gravaDados();
                 String mensagem = String.format(" no valor de R$ %.2f", valorProduto);
@@ -104,17 +181,33 @@ public class CadastrarProduto extends javax.swing.JFrame {
             }
         } catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Valor inválido!");
-        }
-        
+        }     
     }//GEN-LAST:event_jButton2ActionPerformed
-
+       
     private void marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_marcaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Procurar imagem");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Imagem", "jpg", "png");
+        fileChooser.setFileFilter(filter);
+        int retorno = fileChooser.showOpenDialog(this);
+        if(retorno == JFileChooser.APPROVE_OPTION){
+            File file = fileChooser.getSelectedFile();
+            diretorio.setText(file.getPath());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void modaAcessorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modaAcessorioActionPerformed
+        // TODO add your handling code here:
+        informatica.setSelected(false);
+    }//GEN-LAST:event_modaAcessorioActionPerformed
+        
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -148,10 +241,20 @@ public class CadastrarProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextArea descricao;
+    private javax.swing.JTextField diretorio;
+    private javax.swing.JRadioButton eletrodomesticos;
+    private javax.swing.JRadioButton esporteLazer;
+    private javax.swing.JRadioButton games;
+    private javax.swing.JRadioButton industriaComercio;
+    private javax.swing.JRadioButton informatica;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField marca;
+    private javax.swing.JRadioButton modaAcessorio;
+    private javax.swing.JRadioButton moveisDecoracao;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField quantidade;
     private javax.swing.JTextField valor;

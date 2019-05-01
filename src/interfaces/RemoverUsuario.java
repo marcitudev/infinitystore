@@ -46,6 +46,12 @@ public class RemoverUsuario extends javax.swing.JFrame {
         setPreferredSize(null);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        nomeDeUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeDeUsuarioActionPerformed(evt);
+            }
+        });
         getContentPane().add(nomeDeUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 270, -1));
 
         jButton1.setText("Remover");
@@ -104,7 +110,7 @@ public class RemoverUsuario extends javax.swing.JFrame {
             }
         }
         
-        List<Integer> indicesAchados = admin.analiseDeRemocaoUser(nomeDeUsuario.getText());
+        List<Integer> indicesAchados = admin.indiceUsuario(nomeDeUsuario.getText());
         indices = new int[indicesAchados.size()];
         for(int k=0; k<indicesAchados.size(); k++){
             indices[k] = indicesAchados.get(k);
@@ -119,6 +125,11 @@ public class RemoverUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nenhum usuário encontrado");
         }
     }//GEN-LAST:event_procurarActionPerformed
+
+    private void nomeDeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeDeUsuarioActionPerformed
+        // TODO add your handling code here:
+        procurar.doClick();
+    }//GEN-LAST:event_nomeDeUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
