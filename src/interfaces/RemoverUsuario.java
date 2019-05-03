@@ -41,34 +41,49 @@ public class RemoverUsuario extends javax.swing.JFrame {
         procurar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(null);
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
+        nomeDeUsuario.setBackground(new java.awt.Color(255, 127, 42));
+        nomeDeUsuario.setFont(new java.awt.Font("Glober SemiBold Free", 0, 13)); // NOI18N
+        nomeDeUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        nomeDeUsuario.setBorder(null);
         nomeDeUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomeDeUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(nomeDeUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 270, -1));
+        getContentPane().add(nomeDeUsuario);
+        nomeDeUsuario.setBounds(150, 62, 140, 25);
 
-        jButton1.setText("Remover");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos - Lixeira.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 90, -1));
+        getContentPane().add(jButton1);
+        jButton1.setBounds(335, 52, 49, 40);
 
-        procurar.setText("Procurar");
+        procurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos - Botão.png"))); // NOI18N
+        procurar.setBorderPainted(false);
+        procurar.setContentAreaFilled(false);
+        procurar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        procurar.setFocusPainted(false);
         procurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 procurarActionPerformed(evt);
             }
         });
-        getContentPane().add(procurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 90, -1));
+        getContentPane().add(procurar);
+        procurar.setBounds(112, 58, 30, 31);
 
         tabela.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
         tabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -81,7 +96,16 @@ public class RemoverUsuario extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabela);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 490, 140));
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(80, 140, 520, 170);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Aviso.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(94, 91, 140, 30);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, -18, 700, 392);
 
         setSize(new java.awt.Dimension(693, 414));
         setLocationRelativeTo(null);
@@ -168,6 +192,8 @@ public class RemoverUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomeDeUsuario;
     private javax.swing.JButton procurar;
