@@ -1,5 +1,6 @@
 package infinitystore.com;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class LojaAdmin {
 			}
 			return "Seja bem-vindo(a), amigo(a) " + nomeDeUsuario + ", à Infinity Store!";
 		}
-		return "Eita! Talvez você tenha errado alguma informação.";
+		return "Talvez você tenha errado alguma informação.";
 	}
 
 	// Verifica se o nome de usuário já existe para evitar cadastro redundante
@@ -36,21 +37,17 @@ public class LojaAdmin {
 	}
 
 	// Retorna se o login é de usuário ou administrador
-	public String EntrarUsuario(String nomeDeUsuario, String senha) {
+	public int EntrarUsuario(String nomeDeUsuario, String senha) {
 		if (nomeDeUsuario.equals("admin") & senha.equals("admin")) {
-			return "admin";
+			return -1;
 		} else {
 			for (Usuario usuTeste : usuarios) {
 				if (usuTeste.getNomeDeUsuario().equals(nomeDeUsuario) & usuTeste.getSenha().equals(senha)) {
-					return "usuario";
+					return usuarios.indexOf(usuTeste);
 				}
 			}
 		}
-		return "nenhum";
-	}
-
-	public List<Usuario> listarUsuarios() {
-		return this.usuarios;
+		return -2;
 	}
 
 	public List<Usuario> procurarUsuario(String nomeDeUsuario) {
@@ -68,6 +65,10 @@ public class LojaAdmin {
             } 
             return listaUsuarios;
 	}
+        
+        public Usuario procurarUserIndice(int index){
+            return usuarios.get(index);
+        }
         
         public List<Integer> indiceUsuario(String nomeDeUsuario) { //Listar produto por índice para depois removê-lo
 		List<Integer> indices = new ArrayList<Integer>();
@@ -109,9 +110,8 @@ public class LojaAdmin {
         
         public List<Produto> procurarProdutoCategoria(String categoria){
             List<Produto> produtosAchados = new ArrayList<Produto>();
-            for(Produto p: this.produtos){
+            for(Produto p: produtos){
                 if(p.getCategoria().equals(categoria)){
-                }else {
                     produtosAchados.add(p);
                 }
             }
@@ -140,9 +140,27 @@ public class LojaAdmin {
 	}
 	
 	public void removerProduto(int indice) {
+                File imagem = new File(produtos.get(indice).getImagem());
+                imagem.delete();
 		produtos.remove(indice);
 	}
+        
+        public void addCarrinho(int indexUser, Produto produto){
+            usuarios.get(indexUser).addProduto(produto);
+        }
 	
+        public void realizarCompra(List<Produto> listaProdutos){
+            int i = 0;
+            for(Produto p: produtos){
+                if(p.equals(listaProdutos.get(i++))){
+                    p.setQuantidade(p.getQuantidade()-1);
+                    if(p.getQuantidade() == 0){
+                        produtos.remove(p);
+                    }
+                }
+            }
+        }
+        
 	public void gravaDados() {
 		Gravador bancoDados = new Gravador();
 		try {

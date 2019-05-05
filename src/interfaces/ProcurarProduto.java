@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -20,12 +21,15 @@ public class ProcurarProduto extends javax.swing.JFrame {
     public ProcurarProduto() {
         admin.recuperaDados();
         initComponents();
+        tabela.getParent().setBackground(new java.awt.Color(26,26,26));
+        tabela.getTableHeader().setUI(null);
     }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         nomeDoProduto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
@@ -35,6 +39,10 @@ public class ProcurarProduto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setBackground(new java.awt.Color(26, 26, 26));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Colunas tabela.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 137, 560, -1));
 
         nomeDoProduto.setBackground(new java.awt.Color(255, 127, 42));
         nomeDoProduto.setFont(new java.awt.Font("Glober SemiBold Free", 0, 13)); // NOI18N
@@ -67,25 +75,28 @@ public class ProcurarProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabela.setFocusable(false);
         tabela.setGridColor(new java.awt.Color(26, 26, 26));
+        tabela.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tabela.setOpaque(false);
         tabela.setRequestFocusEnabled(false);
         tabela.setRowHeight(70);
         jScrollPane1.setViewportView(tabela);
         if (tabela.getColumnModel().getColumnCount() > 0) {
             tabela.getColumnModel().getColumn(0).setResizable(false);
+            tabela.getColumnModel().getColumn(0).setPreferredWidth(5);
             tabela.getColumnModel().getColumn(1).setResizable(false);
-            tabela.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tabela.getColumnModel().getColumn(1).setPreferredWidth(80);
             tabela.getColumnModel().getColumn(2).setResizable(false);
+            tabela.getColumnModel().getColumn(2).setPreferredWidth(10);
             tabela.getColumnModel().getColumn(3).setResizable(false);
+            tabela.getColumnModel().getColumn(3).setPreferredWidth(80);
             tabela.getColumnModel().getColumn(4).setResizable(false);
             tabela.getColumnModel().getColumn(4).setPreferredWidth(0);
             tabela.getColumnModel().getColumn(5).setResizable(false);
-            tabela.getColumnModel().getColumn(5).setPreferredWidth(30);
+            tabela.getColumnModel().getColumn(5).setPreferredWidth(20);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 540, 210));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 540, 170));
 
         jButton1.setBackground(new java.awt.Color(255, 127, 42));
         jButton1.setForeground(new java.awt.Color(26, 26, 26));
@@ -103,7 +114,6 @@ public class ProcurarProduto extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 68, 40, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pesquisar Produtos.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -14, -1, -1));
 
         setSize(new java.awt.Dimension(693, 414));
@@ -113,11 +123,7 @@ public class ProcurarProduto extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
 
-        if (tabela.getRowCount() > 0) {
-            while (tabela.getRowCount() > 0) {
-                modelo.removeRow(0);
-            }
-        }
+        modelo.setNumRows(0);
         
         TableColumnModel columnModel = tabela.getColumnModel();
         JTableRenderer renderer = new JTableRenderer();
@@ -173,6 +179,7 @@ public class ProcurarProduto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomeDoProduto;
     private javax.swing.JTable tabela;

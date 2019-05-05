@@ -136,7 +136,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 this.dispose();
             }
         } else{
-            JOptionPane.showMessageDialog(null, "Por favor, selecione alguma categoria!");
+            JOptionPane.showMessageDialog(null, "Por favor, selecione pelo menos um interesse!");
         }
     }//GEN-LAST:event_cadastrarActionPerformed
     

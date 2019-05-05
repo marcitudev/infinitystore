@@ -51,6 +51,7 @@ public class Interface extends javax.swing.JFrame {
         entrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Entrar.png"))); // NOI18N
         entrar.setBorder(null);
         entrar.setBorderPainted(false);
+        entrar.setContentAreaFilled(false);
         entrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         entrar.setFocusPainted(false);
         entrar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,30 +84,29 @@ public class Interface extends javax.swing.JFrame {
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
 
-        String entrada = admin.EntrarUsuario(nomeDeUsuario.getText(), senha.getText());
-        if(entrada.equals("admin")){
+        int entrada = admin.EntrarUsuario(nomeDeUsuario.getText(), senha.getText());
+        if(entrada == -1){
             Administrador telaAdmin = new Administrador();
             telaAdmin.setVisible(true);
             this.dispose();
-        } else if(entrada.equals("usuario")){
-            JOptionPane.showMessageDialog(null, "Usuário");
+        } else if(entrada >= 0){
+            Usuario telaUser = new Usuario();
+            telaUser.setVisible(true);
+            telaUser.setUser(entrada);
+            this.dispose();
         } else{
             JOptionPane.showMessageDialog(null, "Verifique o nome de usuário ou senha e tente novamente.");
         }
     }//GEN-LAST:event_entrarActionPerformed
-
+    
     private void senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaActionPerformed
-        // TODO add your handling code here:
+        entrar.doClick();
     }//GEN-LAST:event_senhaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         new CadastroUsuario().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

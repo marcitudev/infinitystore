@@ -5,6 +5,8 @@
  */
 package interfaces;
 
+import infinitystore.com.Usuario;
+
 /**
  *
  * @author marcio

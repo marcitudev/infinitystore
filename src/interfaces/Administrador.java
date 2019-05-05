@@ -21,7 +21,6 @@ public class Administrador extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        areaDeTrabalho = new javax.swing.JDesktopPane();
 
         jMenuItem11.setText("jMenuItem11");
 
@@ -34,6 +33,7 @@ public class Administrador extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Remover usuario.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setFocusPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -41,12 +41,13 @@ public class Administrador extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 180, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 169, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(26, 26, 26));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Procurar usuario.png"))); // NOI18N
         jButton2.setBorder(null);
         jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setFocusPainted(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -54,12 +55,13 @@ public class Administrador extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 115, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 104, -1, -1));
 
         jButton3.setBackground(new java.awt.Color(255, 127, 42));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cadastrar produto.png"))); // NOI18N
         jButton3.setBorder(null);
         jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.setFocusPainted(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -67,12 +69,13 @@ public class Administrador extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 115, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 104, -1, -1));
 
         jButton4.setBackground(new java.awt.Color(255, 127, 42));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Remover produto.png"))); // NOI18N
         jButton4.setBorder(null);
         jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.setFocusPainted(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -80,12 +83,13 @@ public class Administrador extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 180, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 169, -1, -1));
 
         jButton5.setBackground(new java.awt.Color(255, 127, 42));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Procurar produto.png"))); // NOI18N
         jButton5.setBorder(null);
         jButton5.setBorderPainted(false);
+        jButton5.setContentAreaFilled(false);
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton5.setFocusPainted(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +97,7 @@ public class Administrador extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 245, -1, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 234, -1, -1));
 
         jButton6.setBackground(new java.awt.Color(26, 26, 26));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Sair.png"))); // NOI18N
@@ -110,7 +114,6 @@ public class Administrador extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/AdminBack.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -17, -1, -1));
-        getContentPane().add(areaDeTrabalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 683, 371));
 
         setSize(new java.awt.Dimension(693, 414));
         setLocationRelativeTo(null);
@@ -156,7 +159,6 @@ public class Administrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane areaDeTrabalho;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
