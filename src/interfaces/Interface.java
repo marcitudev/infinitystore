@@ -9,7 +9,6 @@ public class Interface extends javax.swing.JFrame {
     private LojaAdmin admin = new LojaAdmin();
     
     public Interface() {
-        admin.recuperaDados();
         initComponents();
     }
     
@@ -21,6 +20,7 @@ public class Interface extends javax.swing.JFrame {
         senha = new javax.swing.JPasswordField();
         entrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        visita = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,6 +74,18 @@ public class Interface extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 275, -1, -1));
 
+        visita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Visite-nos.png"))); // NOI18N
+        visita.setBorderPainted(false);
+        visita.setContentAreaFilled(false);
+        visita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        visita.setFocusPainted(false);
+        visita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visitaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(visita, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 26, -1, -1));
+
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/entradas.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -40, 700, 440));
@@ -83,7 +95,7 @@ public class Interface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-
+        admin.recuperaDados();
         int entrada = admin.EntrarUsuario(nomeDeUsuario.getText(), senha.getText());
         if(entrada == -1){
             Administrador telaAdmin = new Administrador();
@@ -107,6 +119,14 @@ public class Interface extends javax.swing.JFrame {
         new CadastroUsuario().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void visitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visitaActionPerformed
+        // TODO add your handling code here:
+        Usuario telaUser = new Usuario();
+        telaUser.setVisible(true);
+        telaUser.setUser(-1);
+        this.dispose();
+    }//GEN-LAST:event_visitaActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -121,5 +141,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JTextField nomeDeUsuario;
     private javax.swing.JPasswordField senha;
+    private javax.swing.JButton visita;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,6 +3,7 @@ package interfaces;
 import infinitystore.com.JTableRenderer;
 import infinitystore.com.LojaAdmin;
 import infinitystore.com.Produto;
+import infinitystore.com.ProdutoRef;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -12,16 +13,15 @@ import javax.swing.table.TableColumnModel;
 
 public class Usuario extends javax.swing.JFrame {
 
-    private int indexUsuario = -1;
+    private int indiceUsuario = -1;
     private LojaAdmin admin = new LojaAdmin();
-    private int[] indices;
-    private List<Produto> produtosAchados = new ArrayList<Produto>();
+    private List<Produto> produtos = new ArrayList<Produto>();
 
     public Usuario() {
         admin.recuperaDados();
         initComponents();
         configTabela();
-        comprarAgora.setVisible(false);
+        desligarBotoes();
     }
 
     @SuppressWarnings("unchecked")
@@ -29,14 +29,17 @@ public class Usuario extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaUsuario = new javax.swing.JTable();
         botaoCarrinho = new javax.swing.JButton();
         botaoProcurar = new javax.swing.JButton();
         nomeProduto = new javax.swing.JTextField();
+        removerCarrinho = new javax.swing.JButton();
         adicionaCarrinho = new javax.swing.JButton();
+        removerFavoritos = new javax.swing.JButton();
         botaoFavoritos = new javax.swing.JButton();
-        configUsuario = new javax.swing.JButton();
+        sair = new javax.swing.JButton();
         adicionarFavorito = new javax.swing.JButton();
         comprarAgora = new javax.swing.JButton();
         modaAcessorios = new javax.swing.JButton();
@@ -46,22 +49,30 @@ public class Usuario extends javax.swing.JFrame {
         industriaComercio = new javax.swing.JButton();
         games = new javax.swing.JButton();
         esporteLazer = new javax.swing.JButton();
+        user = new javax.swing.JLabel();
+        cadastrar = new javax.swing.JButton();
+        username = new javax.swing.JLabel();
+        inicial = new javax.swing.JLabel();
         backgroundUser = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Infinity Store");
         setBackground(new java.awt.Color(255, 102, 0));
         setResizable(false);
         getContentPane().setLayout(null);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Esconder tabela.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(200, 87, 560, 230);
 
         tabelaUsuario.setBackground(new java.awt.Color(26, 26, 26));
         tabelaUsuario.setFont(new java.awt.Font("Helvetica-Normal", 0, 11)); // NOI18N
         tabelaUsuario.setForeground(new java.awt.Color(255, 127, 42));
         tabelaUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Imagem", "Nome", "Marca", "Descrição", "Qtd", "Valor"
@@ -84,17 +95,21 @@ public class Usuario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelaUsuario);
         if (tabelaUsuario.getColumnModel().getColumnCount() > 0) {
             tabelaUsuario.getColumnModel().getColumn(0).setResizable(false);
+            tabelaUsuario.getColumnModel().getColumn(0).setPreferredWidth(20);
             tabelaUsuario.getColumnModel().getColumn(1).setResizable(false);
-            tabelaUsuario.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tabelaUsuario.getColumnModel().getColumn(1).setPreferredWidth(80);
             tabelaUsuario.getColumnModel().getColumn(2).setResizable(false);
+            tabelaUsuario.getColumnModel().getColumn(2).setPreferredWidth(10);
             tabelaUsuario.getColumnModel().getColumn(3).setResizable(false);
+            tabelaUsuario.getColumnModel().getColumn(3).setPreferredWidth(80);
             tabelaUsuario.getColumnModel().getColumn(4).setResizable(false);
+            tabelaUsuario.getColumnModel().getColumn(4).setPreferredWidth(0);
             tabelaUsuario.getColumnModel().getColumn(5).setResizable(false);
-            tabelaUsuario.getColumnModel().getColumn(5).setPreferredWidth(40);
+            tabelaUsuario.getColumnModel().getColumn(5).setPreferredWidth(20);
         }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(220, 110, 470, 180);
+        jScrollPane1.setBounds(210, 110, 470, 200);
 
         botaoCarrinho.setBorderPainted(false);
         botaoCarrinho.setContentAreaFilled(false);
@@ -106,7 +121,7 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCarrinho);
-        botaoCarrinho.setBounds(270, 30, 30, 30);
+        botaoCarrinho.setBounds(272, 28, 30, 30);
 
         botaoProcurar.setBorder(null);
         botaoProcurar.setBorderPainted(false);
@@ -131,7 +146,20 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nomeProduto);
-        nomeProduto.setBounds(500, 27, 140, 20);
+        nomeProduto.setBounds(500, 25, 140, 20);
+
+        removerCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir do carrinho.png"))); // NOI18N
+        removerCarrinho.setBorderPainted(false);
+        removerCarrinho.setContentAreaFilled(false);
+        removerCarrinho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        removerCarrinho.setFocusPainted(false);
+        removerCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removerCarrinhoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(removerCarrinho);
+        removerCarrinho.setBounds(628, 316, 30, 30);
 
         adicionaCarrinho.setBorderPainted(false);
         adicionaCarrinho.setContentAreaFilled(false);
@@ -143,7 +171,20 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(adicionaCarrinho);
-        adicionaCarrinho.setBounds(625, 320, 30, 30);
+        adicionaCarrinho.setBounds(628, 316, 30, 30);
+
+        removerFavoritos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir dos favoritos.png"))); // NOI18N
+        removerFavoritos.setBorderPainted(false);
+        removerFavoritos.setContentAreaFilled(false);
+        removerFavoritos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        removerFavoritos.setFocusPainted(false);
+        removerFavoritos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removerFavoritosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(removerFavoritos);
+        removerFavoritos.setBounds(575, 316, 30, 30);
 
         botaoFavoritos.setBorderPainted(false);
         botaoFavoritos.setContentAreaFilled(false);
@@ -157,21 +198,21 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoFavoritos);
-        botaoFavoritos.setBounds(230, 30, 30, 30);
+        botaoFavoritos.setBounds(229, 28, 30, 30);
 
-        configUsuario.setBorderPainted(false);
-        configUsuario.setContentAreaFilled(false);
-        configUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        configUsuario.setFocusPainted(false);
-        configUsuario.setMaximumSize(new java.awt.Dimension(49, 23));
-        configUsuario.setMinimumSize(new java.awt.Dimension(49, 23));
-        configUsuario.addActionListener(new java.awt.event.ActionListener() {
+        sair.setBorderPainted(false);
+        sair.setContentAreaFilled(false);
+        sair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sair.setFocusPainted(false);
+        sair.setMaximumSize(new java.awt.Dimension(49, 23));
+        sair.setMinimumSize(new java.awt.Dimension(49, 23));
+        sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                configUsuarioActionPerformed(evt);
+                sairActionPerformed(evt);
             }
         });
-        getContentPane().add(configUsuario);
-        configUsuario.setBounds(190, 30, 30, 30);
+        getContentPane().add(sair);
+        sair.setBounds(185, 28, 30, 30);
 
         adicionarFavorito.setBorderPainted(false);
         adicionarFavorito.setContentAreaFilled(false);
@@ -183,12 +224,13 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(adicionarFavorito);
-        adicionarFavorito.setBounds(572, 320, 30, 30);
+        adicionarFavorito.setBounds(575, 316, 30, 30);
 
         comprarAgora.setBackground(new java.awt.Color(26, 26, 26));
         comprarAgora.setForeground(new java.awt.Color(26, 26, 26));
         comprarAgora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Comprar agora.png"))); // NOI18N
         comprarAgora.setBorderPainted(false);
+        comprarAgora.setContentAreaFilled(false);
         comprarAgora.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         comprarAgora.setFocusPainted(false);
         comprarAgora.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +239,7 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(comprarAgora);
-        comprarAgora.setBounds(448, 320, 100, 30);
+        comprarAgora.setBounds(448, 316, 100, 30);
 
         modaAcessorios.setBorderPainted(false);
         modaAcessorios.setContentAreaFilled(false);
@@ -209,7 +251,7 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modaAcessorios);
-        modaAcessorios.setBounds(60, 150, 130, 10);
+        modaAcessorios.setBounds(60, 141, 130, 10);
 
         eletrodomesticos.setBorderPainted(false);
         eletrodomesticos.setContentAreaFilled(false);
@@ -221,7 +263,7 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(eletrodomesticos);
-        eletrodomesticos.setBounds(60, 170, 130, 10);
+        eletrodomesticos.setBounds(60, 160, 130, 10);
 
         informatica.setBorderPainted(false);
         informatica.setContentAreaFilled(false);
@@ -233,7 +275,7 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(informatica);
-        informatica.setBounds(60, 190, 130, 10);
+        informatica.setBounds(60, 180, 130, 10);
 
         moveisDecoracao.setBorderPainted(false);
         moveisDecoracao.setContentAreaFilled(false);
@@ -245,7 +287,7 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(moveisDecoracao);
-        moveisDecoracao.setBounds(60, 210, 130, 10);
+        moveisDecoracao.setBounds(60, 200, 130, 10);
 
         industriaComercio.setBorderPainted(false);
         industriaComercio.setContentAreaFilled(false);
@@ -257,7 +299,7 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(industriaComercio);
-        industriaComercio.setBounds(60, 230, 130, 10);
+        industriaComercio.setBounds(60, 220, 130, 10);
 
         games.setBorderPainted(false);
         games.setContentAreaFilled(false);
@@ -269,7 +311,7 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(games);
-        games.setBounds(60, 250, 130, 10);
+        games.setBounds(60, 238, 130, 10);
 
         esporteLazer.setBorderPainted(false);
         esporteLazer.setContentAreaFilled(false);
@@ -281,7 +323,41 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(esporteLazer);
-        esporteLazer.setBounds(60, 270, 130, 10);
+        esporteLazer.setBounds(60, 258, 130, 10);
+
+        user.setBackground(new java.awt.Color(255, 127, 42));
+        user.setFont(new java.awt.Font("Glober SemiBold Free", 0, 10)); // NOI18N
+        user.setForeground(new java.awt.Color(26, 26, 26));
+        user.setText("User");
+        getContentPane().add(user);
+        user.setBounds(110, 34, 80, 15);
+
+        cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cadastre-se.png"))); // NOI18N
+        cadastrar.setBorder(null);
+        cadastrar.setBorderPainted(false);
+        cadastrar.setContentAreaFilled(false);
+        cadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrar.setFocusPainted(false);
+        cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cadastrar);
+        cadastrar.setBounds(360, 22, 90, 28);
+
+        username.setBackground(new java.awt.Color(255, 127, 42));
+        username.setFont(new java.awt.Font("Gotham", 1, 12)); // NOI18N
+        username.setForeground(new java.awt.Color(26, 26, 26));
+        username.setText("Convidado");
+        getContentPane().add(username);
+        username.setBounds(110, 23, 80, 13);
+
+        inicial.setFont(new java.awt.Font("Gotham", 0, 28)); // NOI18N
+        inicial.setForeground(new java.awt.Color(255, 255, 255));
+        inicial.setText("C");
+        getContentPane().add(inicial);
+        inicial.setBounds(66, 19, 60, 50);
 
         backgroundUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Background User.png"))); // NOI18N
         backgroundUser.setPreferredSize(new java.awt.Dimension(698, 200));
@@ -291,69 +367,102 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backgroundUser);
-        backgroundUser.setBounds(0, -1, 698, 380);
+        backgroundUser.setBounds(0, -20, 720, 400);
 
-        setSize(new java.awt.Dimension(713, 414));
+        setSize(new java.awt.Dimension(693, 414));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setUser(int index) {
-        indexUsuario = index;
+    public void setUser(int indice) {  
+        indiceUsuario = indice;
+        if(indiceUsuario != -1){
+           user.setText(admin.procurarUserIndice(indiceUsuario).getNome());
+            username.setText(admin.procurarUserIndice(indiceUsuario).getNomeDeUsuario());
+            cadastrar.setVisible(false);
+            String[] nome = admin.procurarUserIndice(indice).getNome().split("");
+            inicial.setText(nome[0].toUpperCase());
+        } 
+        inicializarProdutos();
     }
 
     private void nomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeProdutoActionPerformed
         botaoProcurar.doClick();
     }//GEN-LAST:event_nomeProdutoActionPerformed
-
-    public void configTabela() {
+    
+    private void desligarBotoes(){
+        comprarAgora.setVisible(false);
+        removerCarrinho.setVisible(false);
+        removerFavoritos.setVisible(false);
+    }
+    
+    private void configTabela() {
         tabelaUsuario.setDefaultRenderer(Object.class, new CellRenderer());
         TableColumnModel columnModel = tabelaUsuario.getColumnModel();
         JTableRenderer renderer = new JTableRenderer();
         columnModel.getColumn(0).setCellRenderer(renderer);
         tabelaUsuario.setDefaultRenderer(Object.class, new CellRenderer());
         tabelaUsuario.getParent().setBackground(new java.awt.Color(26, 26, 26));
+        tabelaUsuario.getTableHeader().setUI(null);
     }
-
-    private void botaoProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProcurarActionPerformed
+    
+    private void listarNaTabela(){
         DefaultTableModel modelo = (DefaultTableModel) tabelaUsuario.getModel();
-
-        comprarAgora.setVisible(false);
-
         modelo.setNumRows(0);
-
-        List<Integer> index = admin.indiceProduto(nomeProduto.getText());
-        indices = new int[index.size()];
-        for (int k = 0; k < index.size(); k++) {
-            indices[k] = index.get(k);
-        }
-
-        produtosAchados = admin.procurarProduto(nomeProduto.getText());
-        if (produtosAchados.size() > 0) {
-            for (Produto p : produtosAchados) {
+  
+        if (produtos.size() > 0) {
+            for (Produto p : produtos) {
                 ImageIcon imagem = new ImageIcon(p.getImagem());
-                Object[] dados = {imagem, p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), p.getValor()};
+                Object[] dados = {imagem, p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), String.format("R$ %.2f", p.getValor())};
                 modelo.addRow(dados);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Produto(s) não encontrado(s)!");
         }
+    }
+    
+    public void inicializarProdutos() {
+        comprarAgora.setVisible(false);
+        
+        if(indiceUsuario != -1){
+            List<String> interesses = admin.procurarUserIndice(indiceUsuario).getInteresse();
+            List<Produto> produtos = admin.getProdutos();
+            for(Produto p: produtos){
+                if(interesses.contains(p.getCategoria())){
+                    this.produtos.add(p);
+                }
+            } 
+        } else{
+            this.produtos = admin.getProdutos();
+        }
+        listarNaTabela();
+    }
+
+    private void botaoProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProcurarActionPerformed
+        admin.recuperaDados();
+        desligarBotoes();
+        
+        produtos = admin.procurarProduto(nomeProduto.getText());
+        listarNaTabela();
     }//GEN-LAST:event_botaoProcurarActionPerformed
 
     private void botaoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCarrinhoActionPerformed
-        if (indexUsuario != -1) {
-            DefaultTableModel modelo = (DefaultTableModel) tabelaUsuario.getModel();
-
+        admin.recuperaDados();
+        if (indiceUsuario != -1) { 
+            desligarBotoes();
             comprarAgora.setVisible(true);
-
-            modelo.setNumRows(0);
-
-            produtosAchados = admin.procurarUserIndice(indexUsuario).getCarrinho();
-
-            for (Produto p : produtosAchados) {
-                ImageIcon imagem = new ImageIcon(p.getImagem());
-                Object[] proCar = {imagem, p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), p.getValor()};
-                modelo.addRow(proCar);
+            removerCarrinho.setVisible(true);
+            List<Produto> produtosAchados = new ArrayList<Produto>();
+            for(String s: admin.procurarUserIndice(indiceUsuario).getCarrinho()){
+                for(Produto p: admin.getProdutos()){
+                    if(p.getNome().equals(s)){
+                        produtosAchados.add(p);
+                    }
+                }
             }
+            
+            produtos = produtosAchados;
+            
+            listarNaTabela();      
         } else {
             JOptionPane.showMessageDialog(null, "Crie uma conta para fazer seu carrinho em nosso site.");
         }
@@ -361,10 +470,11 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCarrinhoActionPerformed
 
     private void adicionaCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionaCarrinhoActionPerformed
-        if (indexUsuario != -1) {
+        if (indiceUsuario != -1) {
             int click = tabelaUsuario.getSelectedRow();
             if (click != -1) {
-                admin.procurarUserIndice(indexUsuario).addProduto(produtosAchados.get(click));
+                Produto p = produtos.get(click);
+                admin.procurarUserIndice(indiceUsuario).addCarrinho(p.getNome());
                 admin.gravaDados();
             }
         } else {
@@ -373,66 +483,52 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_adicionaCarrinhoActionPerformed
 
     private void botaoFavoritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFavoritosActionPerformed
-        if (indexUsuario != -1) {
-            DefaultTableModel modelo = (DefaultTableModel) tabelaUsuario.getModel();
+        admin.recuperaDados();
+        if (indiceUsuario != -1) {
+            desligarBotoes();
+            removerFavoritos.setVisible(true);
 
-            comprarAgora.setVisible(false);
-
-            modelo.setNumRows(0);
-
-            produtosAchados = admin.procurarUserIndice(indexUsuario).getFavoritos();
-
-            for (Produto p : produtosAchados) {
-                ImageIcon imagem = new ImageIcon(p.getImagem());
-                Object[] proCar = {imagem, p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), p.getValor()};
-                modelo.addRow(proCar);
+            List<Produto> produtosAchados = new ArrayList<Produto>();
+            for(String s: admin.procurarUserIndice(indiceUsuario).getFavoritos()){
+                for(Produto p: admin.getProdutos()){
+                    if(p.getNome().equals(s)){
+                        produtosAchados.add(p);
+                    }
+                }
             }
+            
+            produtos = produtosAchados;
+            
+            listarNaTabela();
         } else {
             JOptionPane.showMessageDialog(null, "Crie uma conta para fazer seu carrinho em nosso site.");
         }
 
     }//GEN-LAST:event_botaoFavoritosActionPerformed
 
-    public void pesquisarPorCategoria(String categoria) {
-        DefaultTableModel modelo = (DefaultTableModel) tabelaUsuario.getModel();
+    private void pesquisarPorCategoria(String categoria) {
+        admin.recuperaDados();
+        desligarBotoes();
 
-        modelo.setNumRows(0);
+        produtos = admin.procurarProdutoCategoria(categoria);
 
-        produtosAchados = admin.procurarProdutoCategoria(categoria);
-        
-        indices = new int[produtosAchados.size()];
-        for (Produto p: produtosAchados) {
-            List<Integer> index = admin.indiceProduto(p.getNome());
-            for (int k = 0; k < index.size(); k++) {
-                indices[k] = index.get(k);
-            }
-        }
-
-        if (produtosAchados.size() > 0) {
-            for (Produto p : produtosAchados) {
-                ImageIcon imagem = new ImageIcon(p.getImagem());
-                Object[] linha = {imagem, p.getNome(), p.getMarca(), p.getDescricao(), p.getQuantidade(), p.getValor()};
-                modelo.addRow(linha);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Nenhum produto desta categoria foi encontrado.");
-        }
+        listarNaTabela();
     }
 
-    private void configUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configUsuarioActionPerformed
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         new Interface().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_configUsuarioActionPerformed
+    }//GEN-LAST:event_sairActionPerformed
 
     private void backgroundUserComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_backgroundUserComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_backgroundUserComponentHidden
 
     private void adicionarFavoritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarFavoritoActionPerformed
-        if (indexUsuario != -1) {
+        if (indiceUsuario != -1) {
             int click = tabelaUsuario.getSelectedRow();
             if (click != -1) {
-                admin.procurarUserIndice(indexUsuario).addFavorito(produtosAchados.get(click));
+                admin.procurarUserIndice(indiceUsuario).addFavorito(produtos.get(click).getNome());
                 admin.gravaDados();
             }
         } else {
@@ -440,10 +536,19 @@ public class Usuario extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_adicionarFavoritoActionPerformed
-
+    
+    public void atualizarCarrinho(){
+        botaoCarrinho.doClick();
+    }
+    
     private void comprarAgoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprarAgoraActionPerformed
-        // TODO add your handling code here:
-        //comprarAgora.setVisible(false);
+        if(produtos.size() > 0){ 
+            Pagamento pagamento = new Pagamento();
+            pagamento.setVisible(true);
+            pagamento.setPagamento(indiceUsuario, produtos);
+        } else{
+            JOptionPane.showMessageDialog(null, "Carrinho vazio!");
+        }
     }//GEN-LAST:event_comprarAgoraActionPerformed
 
     private void modaAcessoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modaAcessoriosActionPerformed
@@ -473,6 +578,33 @@ public class Usuario extends javax.swing.JFrame {
     private void esporteLazerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_esporteLazerActionPerformed
         pesquisarPorCategoria("esporte e lazer");
     }//GEN-LAST:event_esporteLazerActionPerformed
+
+    private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
+        // TODO add your handling code here:
+        new CadastroUsuario().setVisible(true);
+        new Interface().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cadastrarActionPerformed
+
+    private void removerCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerCarrinhoActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tabelaUsuario.getModel();
+        int click = tabelaUsuario.getSelectedRow();
+        if(click != -1){
+            admin.procurarUserIndice(indiceUsuario).removeProduto(click);
+            modelo.removeRow(click);
+            admin.gravaDados();
+        }
+    }//GEN-LAST:event_removerCarrinhoActionPerformed
+
+    private void removerFavoritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerFavoritosActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tabelaUsuario.getModel();
+        int click = tabelaUsuario.getSelectedRow();
+        if(click != -1){
+            admin.procurarUserIndice(indiceUsuario).removeFavorito(click);
+            modelo.removeRow(click);
+            admin.gravaDados();
+        }
+    }//GEN-LAST:event_removerFavoritosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -517,18 +649,25 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JButton botaoCarrinho;
     private javax.swing.JButton botaoFavoritos;
     private javax.swing.JButton botaoProcurar;
+    private javax.swing.JButton cadastrar;
     private javax.swing.JButton comprarAgora;
-    private javax.swing.JButton configUsuario;
     private javax.swing.JButton eletrodomesticos;
     private javax.swing.JButton esporteLazer;
     private javax.swing.JButton games;
     private javax.swing.JButton industriaComercio;
     private javax.swing.JButton informatica;
+    private javax.swing.JLabel inicial;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modaAcessorios;
     private javax.swing.JButton moveisDecoracao;
     private javax.swing.JTextField nomeProduto;
+    private javax.swing.JButton removerCarrinho;
+    private javax.swing.JButton removerFavoritos;
+    private javax.swing.JButton sair;
     private javax.swing.JTable tabelaUsuario;
+    private javax.swing.JLabel user;
+    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

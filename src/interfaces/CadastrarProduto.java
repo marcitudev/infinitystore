@@ -34,7 +34,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
         quantidade = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         diretorio = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
         modaAcessorio = new javax.swing.JRadioButton();
         eletrodomesticos = new javax.swing.JRadioButton();
         informatica = new javax.swing.JRadioButton();
@@ -138,7 +137,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(diretorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 260, 100, 20));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
 
         modaAcessorio.setBackground(new java.awt.Color(245, 127, 42));
         modaAcessorio.setBorder(null);
@@ -388,7 +386,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField marca;
     private javax.swing.JRadioButton modaAcessorio;
     private javax.swing.JRadioButton moveisDecoracao;
